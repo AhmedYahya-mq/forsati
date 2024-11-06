@@ -1,0 +1,247 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    margin: 30px 0;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.form-control {
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 18px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.flag-icon {
+    width: 20px;
+    height: 14px;
+    margin-left: 8px;
+}
+
+.select2-container--bootstrap5 .select2-selection {
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+}
+
+.select2-search__field {
+    direction: rtl;
+}
+
+.form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.form-check-label {
+    margin-right: 10px;
+}
+
+
+.container-form {
+    position: absolute;
+    z-index: 10000;
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.select2-container {
+    z-index: 100000 !important;
+    /* تأكد من أن القائمة تظهر فوق العناصر الأخرى */
+}
+
+li.select2-results__option {
+    text-align: right;
+}
+
+
+
+.container-form {
+    background: #333333cf;
+    display: none;
+    position: fixed;
+    overflow: auto;
+    height: 100vh;
+
+    & .container {
+        height: fit-content;
+        margin: 15px;
+    }
+
+    & input[type='radio'],
+    & input[type='checkbox'] {
+        display: none;
+    }
+
+    & input[type='radio']:checked~label,
+    & input[type='checkbox']:checked~label {
+        background-color: #007bff;
+        color: white;
+    }
+
+}
+
+
+
+.icon-btn {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #cdcdcd;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+    transition: width 0.2s ease-in-out;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    position: absolute;
+    top: -30px;
+    right: .75rem;
+}
+
+.add-btn:hover {
+    width: 120px;
+}
+
+.add-btn::before,
+.add-btn::after {
+    transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+    content: "";
+    position: absolute;
+    height: 4px;
+    width: 10px;
+    top: calc(50% - 2px);
+    background: rgb(0, 153, 255);
+}
+
+.add-btn::after {
+    right: 14px;
+    overflow: hidden;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.add-btn::before {
+    left: 14px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.icon-btn:focus {
+    outline: none;
+}
+
+.btn-txt {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.add-btn:hover::before,
+.add-btn:hover::after {
+    width: 4px;
+    border-radius: 2px;
+}
+
+.add-btn:hover .btn-txt {
+    opacity: 1;
+}
+
+.add-icon::after,
+.add-icon::before {
+    transition: all 0.2s ease-in-out;
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 2px;
+    top: calc(50% - 10px);
+    background: rgb(0, 153, 255);
+    overflow: hidden;
+}
+
+.add-icon::before {
+    left: 22px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.add-icon::after {
+    right: 22px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.add-btn:hover .add-icon::before {
+    left: 15px;
+    height: 4px;
+    top: calc(50% - 2px);
+}
+
+.add-btn:hover .add-icon::after {
+    right: 15px;
+    height: 4px;
+    top: calc(50% - 2px);
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__clear {
+    float: left;
+}
+
+button.btn-pages {
+    transition: all 0.5s;
+    background-color: #007bff;
+    color: white !important;
+}
+
+button.btn-pages:active {
+    transform: scale(0.8);
+}
+
+.main-content {
+    padding-top: 116px;
+    min-height: 100vh;
+}
+
+.col-md-0.rounded-circle {
+    background: azure;
+    width: 30px;
+    height: 30px;
+    align-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.col-md-0.rounded-circle:active {
+    transform: translateY(-10px);
+}

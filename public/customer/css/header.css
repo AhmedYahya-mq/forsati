@@ -1,0 +1,358 @@
+header {
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 50px 3fr;
+    box-shadow: 0 0 5px rgba(0, 0, 0);
+    padding: 0 10px;
+    gap: 2em;
+    background-color: transparent !important;
+    backdrop-filter: blur(3px) !important;
+    z-index: 1000;
+}
+
+header .logo {
+    width: 60px;
+    height: 60px;
+}
+
+header .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+header .nav-sidebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background-color: inherit;
+}
+
+.left-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 10px;
+    height: 60px;
+}
+
+header .nav-sidebar .menu-desktop ul {
+    position: relative;
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+header .nav-sidebar .menu-desktop ul li {
+    color: var(--secondary-color);
+    font-weight: 500;
+    width: var(--width);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .nav-sidebar .menu-desktop ul li:last-child {
+    position: absolute;
+    content: "";
+    top: 40px;
+    width: 80px;
+    height: 5px;
+    padding: 0;
+    background: var(--gradient-radial);
+    z-index: -1;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+
+header.dark .nav-sidebar .menu-desktop ul li:last-child {
+    background: var(--gradient-linear);
+}
+
+header .nav-sidebar .menu-desktop ul li a {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+header .nav-sidebar .user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+header .nav-sidebar .profile {
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--gradient-radial);
+}
+
+header .nav-sidebar .profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+header .nav-sidebar .user-info nav {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 2px rgba(0, 0, 0);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    top: 85%;
+    left: 24px;
+    display: none;
+}
+
+header .nav-sidebar .user-info nav ul {
+    list-style: none !important;
+}
+
+header .nav-sidebar .user-info nav .menu-user li {
+    border-bottom: 2px solid var(--primary-color);
+    margin-bottom: 5px;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+}
+
+header .nav-sidebar .user-info nav .menu-user li:hover {
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -o-transform: scale(0.9);
+}
+
+header .nav-sidebar .left-nav #login {
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-size: smaller;
+}
+
+header .nav-sidebar .left-nav #login:hover {
+    text-decoration: underline;
+}
+
+header .nav-sidebar .user-info nav .auth-login-signin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn {
+    position: relative;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    overflow: hidden;
+    font-weight: bold;
+    background: transparent !important;
+    color: var(--primary-color) !important;
+    z-index: 10;
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    inset: 0;
+    background: var(--secondary-color);
+    transition: all 0.3s ease-in-out;
+    z-index: -1;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+}
+
+.btn:hover::after {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+}
+
+.btn:hover {
+    color: var(--secondary-color) !important;
+    border-color: var(--secondary-color);
+}
+
+.container-base.dark .btn {
+    background: var(--primary-color);
+    color: var(--secondary-color) !important;
+}
+
+.container-base.dark .btn:hover {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color);
+}
+
+.container-base.dark .btn::after {
+    background: var(--primary-color);
+}
+
+.container-base.dark .btn:hover::after {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+}
+
+header .nav-sidebar div.btn-show-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: none;
+}
+
+header .nav-sidebar div.btn-show-menu span {
+    display: flex;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-radial);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+}
+
+header .nav-sidebar div.btn-show-menu span:nth-child(1).animation-slide {
+    transform: translateY(10px) rotate(45deg);
+    -webkit-transform: translateY(10px) rotate(45deg);
+    -moz-transform: translateY(10px) rotate(45deg);
+    -ms-transform: translateY(10px) rotate(45deg);
+    -o-transform: translateY(10px) rotate(45deg);
+}
+
+header .nav-sidebar div.btn-show-menu span:nth-child(3).animation-slide {
+    transform: translateY(-6.4px) rotate(-45deg);
+    -webkit-transform: translateY(-6.4px) rotate(-45deg);
+    -moz-transform: translateY(-6.4px) rotate(-45deg);
+    -ms-transform: translateY(-6.4px) rotate(-45deg);
+    -o-transform: translateY(-6.4px) rotate(-45deg);
+}
+
+header .nav-sidebar div.btn-show-menu span:nth-child(2).animation-slide {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+}
+
+.mode {
+    cursor: pointer;
+}
+
+.mode .fas {
+    color: var(--secondary-color);
+}
+
+@media screen and (max-width: 870px) {
+    header .nav-sidebar div.btn-show-menu {
+        display: flex;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    header.show-menu {
+        box-shadow: none;
+        height: 380px;
+        backdrop-filter: blur(2px) contrast(40%) !important;
+    }
+
+    .menu-desktop {
+        position: absolute;
+        width: 100%;
+        top: 80px;
+        left: 0;
+        transition: all 0.5s;
+        transform-origin: top;
+        transform: scaleY(0);
+        -webkit-transform: scaleY(0);
+        -moz-transform: scaleY(0);
+        -ms-transform: scaleY(0);
+        -o-transform: scaleY(0);
+        box-shadow: 0 5px 5px -3px #000;
+        padding: 5px 0;
+        background-color: inherit;
+    }
+
+    .menu-desktop.show {
+        transform: scaleY(1);
+        -webkit-transform: scaleY(1);
+        -moz-transform: scaleY(1);
+        -ms-transform: scaleY(1);
+        -o-transform: scaleY(1);
+    }
+
+    .menu-desktop ul {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 0 !important;
+        padding: 5px 0;
+    }
+
+    header .nav-sidebar .user-info nav {
+        left: 80px;
+    }
+}
+
+@media screen and (max-height: 450px) {
+    section#introdaction {
+        margin-top: 100px !important;
+    }
+}

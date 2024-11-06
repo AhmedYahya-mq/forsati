@@ -1,0 +1,262 @@
+.table-data .table td {
+    padding-bottom: 15px;
+}
+
+.search-container {
+    .input-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        outline: none;
+        padding: 14px 12px;
+        background-color: transparent;
+        cursor: pointer;
+        transition: all .5s ease-in-out;
+        font-size: 14px;
+    }
+
+    .input::placeholder {
+        color: transparent;
+    }
+
+    .input:focus::placeholder {
+        color: rgb(131, 128, 128);
+    }
+
+    .input:focus,
+    .input:not(:placeholder-shown) {
+        background-color: #fff;
+        border: 1px solid rgb(91, 107, 255);
+        width: 200px;
+        cursor: none;
+        padding: 18px 16px 18px 45px;
+    }
+
+    .icon {
+        position: absolute;
+        left: 0;
+        height: 45px;
+        width: 45px;
+        background-color: #fff;
+        border-radius: 99px;
+        z-index: -1;
+        fill: rgb(91, 107, 255);
+        border: 1px solid rgb(91, 107, 255);
+    }
+
+    .input:focus+.icon,
+    .input:not(:placeholder-shown)+.icon {
+        z-index: 0;
+        background-color: transparent;
+        border: none;
+    }
+}
+
+
+.icon-btn {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #cdcdcd;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+    transition: width 0.2s ease-in-out;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    width: 120px;
+}
+
+.add-btn::before,
+.add-btn::after {
+    transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+    content: "";
+    position: absolute;
+    height: 4px;
+    width: 10px;
+    top: calc(50% - 2px);
+    background: rgb(0, 153, 255);
+}
+
+.add-btn::after {
+    right: 14px;
+    overflow: hidden;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.add-btn::before {
+    left: 14px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.icon-btn:focus {
+    outline: none;
+}
+
+.btn-txt {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.add-btn:hover::before,
+.add-btn:hover::after {
+    width: 4px;
+    border-radius: 2px;
+}
+
+.add-btn:hover .btn-txt {
+    opacity: 1;
+}
+
+.add-icon::after,
+.add-icon::before {
+    transition: all 0.2s ease-in-out;
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 2px;
+    top: calc(50% - 10px);
+    background: rgb(0, 153, 255);
+    overflow: hidden;
+}
+
+.add-icon::before {
+    left: 22px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.add-icon::after {
+    right: 22px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.add-btn:hover .add-icon::before {
+    left: 15px;
+    height: 4px;
+    top: calc(50% - 2px);
+}
+
+.add-btn:hover .add-icon::after {
+    right: 15px;
+    height: 4px;
+    top: calc(50% - 2px);
+}
+
+
+.select2-container {
+    z-index: 100000 !important;
+    /* تأكد من أن القائمة تظهر فوق العناصر الأخرى */
+}
+
+i.fas.icon-show-pass {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(50%);
+    cursor: pointer;
+}
+
+.filepond--root .filepond--credits[style] {
+    display: none;
+}
+
+
+/* From Uiverse.io by uxRakhal */
+/* The switch - the box around the slider */
+
+.switch {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 2.5em;
+    height: 1em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: white;
+    border-radius: 50px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 0.7em;
+    width: 0.7em;
+    right: 0.2em;
+    bottom: 0.15em;
+    transform: translateX(150%);
+    background-color: #59d102;
+    border-radius: inherit;
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.slider:after {
+    position: absolute;
+    content: "";
+    height: 0.7em;
+    width: 0.7em;
+    left: 0.2em;
+    bottom: 0.15em;
+    background-color: #ff0000;
+    border-radius: inherit;
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.switch input:focus+.slider {
+    box-shadow: 0 0 1px #59d102;
+}
+
+.switch input:checked+.slider:before {
+    transform: translateY(0);
+}
+
+.switch input:checked+.slider::after {
+    transform: translateX(-150%);
+}
+
+
+.icon-btn {
+    position: relative;
+    top: unset;
+    right: unset;
+}
+
+.filepond--root .filepond--credits[style] {
+    display: none;
+}
+
+
+div.table-data-feature {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}

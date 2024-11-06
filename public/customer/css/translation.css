@@ -1,0 +1,108 @@
+/* تصميم الرأس ليتناسب مع الانجليزي */
+header.en {
+  direction: ltr;
+}
+
+header.en .nav-sidebar .user-info nav {
+  right: 40px;
+  left: unset;
+}
+
+.translation i {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+header.dark .translation i {
+  color: var(--primary-color);
+}
+
+/* نهاية تصميم الرأس لتناسب مع الانجليزيه */
+
+/* بداية تصميم المحتوى انجليزي */
+main.en {
+  direction: ltr;
+}
+
+/* تعديلات المقدمة اللتناسب مع الانجليزيه */
+main.en .side-left-bar h3 span::after {
+  left: unset !important;
+  right: -8px;
+  border-left: 3px solid var(--primary-color);
+  border-right: none !important;
+  animation: cursors 0.6s infinite, tyingen 20s steps(14) infinite;
+  -webkit-animation: cursors 0.6s infinite, tyingen 20s steps(14) infinite;
+}
+main.en .side-left-bar h3 span::before {
+  content: "Applying for scholarships";
+  animation: wordsen 20s infinite;
+  -webkit-animation: wordsen 20s infinite;
+}
+@keyframes wordsen {
+  0%,
+  16.66666666666667% {
+    content: "View Scholarships";
+  }
+  17.66666666666667%,
+  33.33333333333333% {
+    content: "Training Opportunities";
+  }
+  34.33333333333333%,
+  50% {
+    content: "Submitting Scholarship Applications";
+  }
+  51%,
+  66.66666666666667% {
+    content: "Preparing Application Documents";
+  }
+  67.66666666666667%,
+  83.33333333333334% {
+    content: "Obtaining University Acceptances";
+  }
+  84.33333333333334%,
+  100% {
+    content: "Educational Consultancy Services";
+  }
+}
+
+@keyframes tyingen {
+  8.333333333333336%,
+  12.5%,
+  25.00000000000001%,
+  29.16666666666668%,
+  41.66666666666668%,
+  45.83333333333335%,
+  58.33333333333335%,
+  62.50000000000002%,
+  75.00000000000002%,
+  79.16666666666669%,
+  91.6666666666667%,
+  95.83333333333336% {
+    width: 0;
+  }
+  4.166666666666668%,
+  16.66666666666667%,
+  20.83333333333334%,
+  33.33333333333334%,
+  37.50000000000001%,
+  50.00000000000002%,
+  54.16666666666668%,
+  66.66666666666669%,
+  70.83333333333336%,
+  83.33333333333336%,
+  87.50000000000003% {
+    width: calc(100% + 8px);
+  }
+}
+/* نهاية تعديلات المقدمة للتناسب مع الانجليزي */
+
+/* نهاية تصميم المحتوى */
+
+/* بداية تصميم المحتوى انجليزي المتجاوب مع شاشات */
+@media screen and (max-width: 826px) {
+  /* تصميم الرأس الانجليزي المتجاوب مع شاشات */
+  header.en .nav-sidebar .user-info nav {
+    right: 40px;
+    left: unset;
+  }
+}

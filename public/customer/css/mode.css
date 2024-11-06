@@ -1,0 +1,55 @@
+body .bg-v-dark {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: -100;
+  background-color: var(--dark-color);
+  transition: all 0.5s;
+  transform-origin: top left;
+  transform: scale(0);
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  border-bottom-right-radius: 80%;
+}
+
+body .bg-v-dark.active {
+  transform: scale(2);
+  -webkit-transform: scale(2);
+  -moz-transform: scale(2);
+  -ms-transform: scale(2);
+  -o-transform: scale(2);
+}
+
+header.dark a,
+header.dark .mode .fas,
+header.dark .nav-sidebar .user-info nav .menu-user li a {
+  color: var(--primary-color) !important;
+}
+
+header.dark {
+  box-shadow: 0 0 5px var(--light-color);
+  background-color: var(--dark-color);
+}
+
+header.dark .menu-desktop.show {
+  box-shadow: 0 6px 5px -5px var(--light-color);
+}
+
+header.dark .nav-sidebar .user-info nav {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+header.dark .mode .fas {
+  color: var(--primary-color);
+}
+
+
+header.dark .nav-sidebar .profile{
+  background: var(--gradient-linear);
+}
+
+header.dark .nav-sidebar div.btn-show-menu span{
+  background: var(--gradient-linear);
+}

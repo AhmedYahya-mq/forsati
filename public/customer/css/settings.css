@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+:root {
+    --primary-color: #d0962a;
+    --secondary-color: #154b77;
+    --gradient-linear: linear-gradient(45deg,
+            #774c00,
+            #d0962a,
+            #fff,
+            #d0962a,
+            #774c00);
+    --light-color: #fff;
+    --dark-color: #26242e;
+    --gradient-radial: linear-gradient(45deg,
+            #003058,
+            var(--secondary-color),
+            #4daeff,
+            var(--secondary-color),
+            #003058);
+
+    --color-text: #616161;
+    --color-text-btn: #ffffff;
+    --card1-gradient-color1: #f12711;
+    --card1-gradient-color2: #f5af19;
+    --card2-gradient-color1: #7f00ff;
+    --card2-gradient-color2: #e100ff;
+    --card3-gradient-color1: #3f2b96;
+    --card3-gradient-color2: #a8c0ff;
+    --card4-gradient-color1: #11998e;
+    --card4-gradient-color2: #38ef7d;
+
+    --repeating-conic-gradient-dark-117: repeating-conic-gradient(from 117.5deg,
+            #774c00 0%,
+            #d0962a 0%,
+            #fff 5%,
+            #d0962a 10%,
+            #774c00 10%,
+            transparent 10%,
+            transparent 50%);
+    --repeating-conic-gradient-dark-27: repeating-conic-gradient(from 27deg,
+            #774c00 0%,
+            #d0962a 0%,
+            #fff 5%,
+            #d0962a 10%,
+            #774c00 10%,
+            transparent 10%,
+            transparent 50%);
+    --repeating-conic-gradient-light-117: repeating-conic-gradient(from 117.5deg,
+            #003058 0%,
+            var(--secondary-color) 0%,
+            #4daeff 5%,
+            var(--secondary-color) 10%,
+            #003058 10%,
+            transparent 10%,
+            transparent 50%);
+    --repeating-conic-gradient-light-27: repeating-conic-gradient(from 27deg,
+            #003058 0%,
+            var(--secondary-color) 0%,
+            #4daeff 5%,
+            var(--secondary-color) 10%,
+            #003058 10%,
+            transparent 10%,
+            transparent 50%);
+
+    --Moderate-blue: hsl(238, 40%, 52%);
+    --Soft-Red: hsl(358, 79%, 66%);
+    --Light-grayish-blue: hsl(239, 57%, 85%);
+    --Pale-red: hsl(357, 100%, 86%);
+
+    --Dark-blue: hsl(212, 24%, 26%);
+    --Grayish-Blue: hsl(211, 10%, 45%);
+    --Light-gray: hsl(223, 19%, 93%);
+    --Very-light-gray: hsl(228, 33%, 97%);
+    --White: hsl(0, 0%, 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+}
+
+body {
+    background-color: var(--light-color);
+    color: var(--secondary-color);
+    overflow: hidden;
+    direction: rtl;
+}
+
+.container-base {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    background: transparent;
+    scroll-behavior: smooth;
+}
+
+.container-base::-webkit-scrollbar {
+    width: 5px;
+    background: var(--primary-color);
+}
+
+.container-base.dark::-webkit-scrollbar {
+    background: var(--secondary-color);
+}
+
+.container-base::-webkit-scrollbar-thumb {
+    background: var(--gradient-radial);
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    cursor: pointer;
+}
+
+.container-base.dark::-webkit-scrollbar-thumb {
+    background: var(--gradient-linear);
+}
+
+.container-base.dark input {
+    background-color: #26242e !important;
+    border-color: #6b7280 !important;
+}
+
+.container-base.dark label {
+    color: var(--primary-color) !important;
+}
+
+label {
+    color: var(--secondary-color) !important;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+    margin: 0 10px;
+}
+

@@ -1,0 +1,127 @@
+.blog-details .img-post {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    box-shadow: 5px 5px 6px #dadada, -5px -5px 6px #f6f6f6;
+}
+
+main.dark .blog-details .img-post {
+    box-shadow: 5px 5px 8px #1b1b1b, -5px -5px 8px #272727;
+}
+
+.blog-details .img-post img {
+    width: 100%;
+    max-height: 600px;
+    transform: scale(1.1);
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}
+
+.blog-details .img-post:hover img {
+    filter: saturate(200%);
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -webkit-filter: saturate(200%);
+}
+
+.blog-details .img-post .post-social-media {
+    position: absolute;
+    top: 5px;
+    left: -25px;
+    display: flex;
+    gap: 7px;
+}
+
+main.en .blog-details .img-post .post-social-media {
+    left: 25px;
+}
+
+.blog-details .img-post .post-social-media a {
+    font-size: 1.2em;
+    text-decoration: none !important;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+}
+
+.blog-details .img-post .post-social-media a:hover {
+    transform: translateY(-3px) scale(1.1);
+    -webkit-transform: translateY(-3px) scale(1.1);
+    -moz-transform: translateY(-3px) scale(1.1);
+    -ms-transform: translateY(-3px) scale(1.1);
+    -o-transform: translateY(-3px) scale(1.1);
+}
+
+.blog-details .content {
+    margin-top: 50px;
+    position: relative;
+}
+
+.blog-details .content :where(h1, h2, h3, h4, h5, h6) {
+    background: rgba(22, 104, 255, 0.3);
+    padding: 15px 15px 15px 15px;
+    margin: 20px 0;
+    display: inline-block;
+}
+
+main.dark .blog-details .content :where(h1, h2, h3, h4, h5, h6) {
+    background: rgba(228, 169, 19, 0.3);
+}
+
+main .blog-details .content a {
+    color: var(--primary-color) !important;
+}
+
+main.dark .blog-details .content a {
+    color: rgb(0, 128, 255) !important;
+}
+
+main.dark ::marker {
+    color: var(--primary-color);
+}
+
+
+.content hr {
+  margin: 40px 0 20px 0;
+}
+
+.content{
+  line-height: 1.5em;
+}
+.content :where(ol,ul){
+    margin-right: 60px;
+}
+
+.content.en :where(ol,ul){
+  margin-left: 60px;
+}
+
+.content > *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(h1 + *):not(h2 + *):not(h3 + *):not(h4 + *):not(h5 + *):not(h6 + *):not(hr) {
+    margin-top: 20px;
+}
+
+.container-base .content hr {
+    border: none; /* إزالة الحدود الافتراضية */
+    border-top: 2px solid var(--secondary-color); /* تعيين لون وسمك الخط */
+}
+
+.container-base.dark .content hr {
+    border-top: 2px solid var(--primary-color); /* تغيير اللون إذا كانت الفئة .dark موجودة */
+}

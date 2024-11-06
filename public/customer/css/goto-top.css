@@ -1,0 +1,48 @@
+.gototop.active {
+  opacity: 1;
+  visibility: visible;
+  bottom: 20px;
+}
+
+.gototop {
+  position: fixed;
+  bottom: -20px;
+  z-index: 9999999;
+  visibility: hidden;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+.gototop,
+.mfp-with-zoom.mfp-removing .mfp-container,
+.mfp-with-zoom.mfp-removing.mfp-bg {
+  opacity: 0;
+}
+
+.gototop,
+.owl-carousel .owl-controls .owl-nav .owl-next,
+.owl-carousel-posts .owl-controls .owl-nav .owl-next {
+  right: 20px;
+}
+
+.gototop a {
+  width: 50px;
+  height: 50px;
+  display: table;
+  background: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.gototop a i {
+  height: 50px;
+  display: table-cell;
+  vertical-align: middle;
+  color: var( --secondary-color) !important;
+}
+
+.container.dark .gototop a i{
+    color: var( --primary-color) !important;
+
+}

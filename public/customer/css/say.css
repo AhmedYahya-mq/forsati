@@ -1,0 +1,120 @@
+:root {
+  --color-dark: #151c35;
+  --color-secodary-dark: #464c70;
+  --color-text: #8297e2;
+  --color-light: #ebebfb;
+}
+
+section#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.box-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.box-title :where(h2,p){
+    width: auto;
+}
+.board {
+  max-width: 987px;
+  width: 100%;
+  text-align: center;
+  border-radius: 8px;
+  padding: 4em 0;
+}
+
+.swiper-say {
+  width: 100%;
+  height: auto;
+}
+
+.swiper-say .swiper-slide .flex {
+  margin: 3em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.swiper-say .swiper-slide .comments {
+  background: var(--color-light) !important ;
+  color: var(--secondary-color);
+  padding: 1.5em 2em;
+  width: 50%;
+  border-radius: 5px;
+  font-size: 0.9em;
+  position: relative;
+}
+
+main.dark .swiper-say .swiper-slide .comments {
+  background: #39394a !important;
+  color: var(--primary-color);
+}
+
+.swiper-say .swiper-slide .comments::after {
+  content: "";
+  position: absolute;
+  bottom: -19px;
+  left: 45%;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid var(--color-light);
+  z-index: -99;
+}
+main.dark .swiper-say .swiper-slide .comments::after {
+  border-top: 20px solid #39394a;
+}
+
+.swiper-say .profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+  overflow: hidden;
+}
+
+.swiper-say .profile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 5px solid var(--secondary-color);
+  margin: 10px 0;
+  object-fit: cover;
+  background: var(--gradient-radial);
+}
+main.dark .swiper-say .profile img {
+  border-color: var(--primary-color);
+  background: var(--gradient-linear);
+}
+.swiper-say .profile > a {
+  text-decoration: none;
+}
+
+
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  background: var(--secondary-color);
+}
+
+main.dark
+  .swiper-horizontal
+  > .swiper-pagination-bullets
+  .swiper-pagination-bullet {
+  background: var(--primary-color);
+}
+
+@media screen and (max-width: 500px) {
+  .swiper-say .swiper-button-prev,
+  .swiper-button-next {
+    display: none;
+  }
+  .swiper-say .swiper-slide .comments {
+    width: 90%;
+  }
+}

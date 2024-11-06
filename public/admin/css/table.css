@@ -1,0 +1,242 @@
+.m-b-35 {
+    margin-bottom: 35px;
+}
+
+.title-5 {
+    text-transform: capitalize;
+    font-size: 22px;
+    font-weight: 500;
+    color: #393939;
+}
+
+@media (max-width: 991px) {
+    .table-data__tool {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -moz-box-orient: vertical;
+        -moz-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+}
+
+.table-data__tool {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.table-data__tool .table-data__tool-left>div {
+    margin-right: 12px;
+}
+
+.rs-select2--light {
+    display: inline-block;
+}
+
+.rs-select2--md {
+    width: 160px;
+}
+
+.select2-container {
+    display: block;
+    max-width: 100% !important;
+    width: auto !important;
+    outline: none;
+}
+
+.select2-container {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    vertical-align: middle;
+}
+
+
+@media (max-width: 991px) {
+    .table-data__tool .table-data__tool-right {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 991px) {
+    .table-data__tool .table-data__tool-right>button {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+.au-btn-icon i {
+    vertical-align: baseline;
+    margin-right: 5px;
+}
+
+.table-data__tool .table-data__tool-right>button {
+    margin-right: 12px;
+}
+
+.au-btn--small {
+    padding: 0 20px;
+    line-height: 40px;
+    font-size: 14px;
+}
+
+.au-btn--green {
+    background: #63c76a;
+}
+
+.table-responsive {
+    padding-right: 1px;
+}
+
+.table-data2 {
+    border-collapse: collapse;
+    overflow: visible;
+}
+
+.table {
+    margin: 0;
+}
+
+.table-data2.table thead th:first-child {
+    padding-right: 0;
+}
+
+.table-data2.table thead th {
+    font-size: 12px;
+    color: #555;
+    text-transform: uppercase;
+    border: none;
+    font-weight: 600;
+    vertical-align: top;
+    padding: 15px 40px;
+    padding-right: 10px;
+}
+
+.table-data2.table tbody {
+    background: #fff;
+}
+
+.table-data2.table tbody td {
+    font-size: 14px;
+    color: #808080;
+    vertical-align: middle;
+    padding: 25px 40px;
+    padding-right: 10px;
+    border: none;
+}
+
+@media (max-width: 1199px) {
+    .table-data2.table tbody tr td:first-child {
+        vertical-align: middle;
+    }
+}
+
+@media (max-width: 1199px) {
+    .table-data2.table tbody tr td:first-child .au-checkbox {
+        margin-top: 0;
+    }
+}
+
+.table-data2.table tbody tr td:first-child .au-checkbox {
+    margin-top: 5px;
+}
+
+
+.table-data2 .spacer {
+    height: 5px;
+    background: transparent;
+}
+
+.table-data-feature {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -moz-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+
+.table-data-feature .item {
+    display: block;
+    height: 30px;
+    width: 30px;
+    position: relative;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    background: #e5e5e5;
+    margin-right: 5px;
+}
+
+
+.search-container {
+    .input-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        outline: none;
+        padding: 14px 12px;
+        background-color: transparent;
+        cursor: pointer;
+        transition: all .5s ease-in-out;
+        font-size: 14px;
+    }
+
+    .input::placeholder {
+        color: transparent;
+    }
+
+    .input:focus::placeholder {
+        color: rgb(131, 128, 128);
+    }
+
+    .input:focus,
+    .input:not(:placeholder-shown) {
+        background-color: #fff;
+        border: 1px solid rgb(91, 107, 255);
+        width: 200px;
+        cursor: none;
+        padding: 18px 16px 18px 45px;
+    }
+
+    .icon {
+        position: absolute;
+        left: 0;
+        height: 45px;
+        width: 45px;
+        background-color: #fff;
+        border-radius: 99px;
+        z-index: -1;
+        fill: rgb(91, 107, 255);
+        border: 1px solid rgb(91, 107, 255);
+    }
+
+    .input:focus+.icon,
+    .input:not(:placeholder-shown)+.icon {
+        z-index: 0;
+        background-color: transparent;
+        border: none;
+    }
+}

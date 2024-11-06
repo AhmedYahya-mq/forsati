@@ -1,0 +1,48 @@
+.banner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10%;
+}
+
+.banner-container .banner {
+    margin: 10px;
+    overflow: hidden;
+}
+
+.banner-container .banner .image-ad-box {
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 5px 10px #0005;
+    border-radius: 5px;
+}
+
+
+.banner-container .banner .image-ad-box img {
+    width: 100%;
+    overflow: hidden;
+    height: 300px;
+    min-height: 300px;
+}
+
+
+.mobile {
+    display: none;
+}
+
+
+
+@media (max-width: 768px) {
+    .mobile {
+        display: block;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    .banner-container .banner .image-ad-box img {
+        height: 400px;
+        min-height: 400px;
+    }
+}

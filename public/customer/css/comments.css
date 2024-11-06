@@ -1,0 +1,476 @@
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    filter: saturate(80%);
+}
+
+button.reply-btn {
+    display: inline;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.bu-primary {
+    background-color: var(--Moderate-blue);
+    color: var(--White);
+    border: none;
+    padding: .75rem 1.5rem;
+    border-radius: 4px;
+}
+
+.comment-section {
+    padding: 0 1rem;
+}
+
+.container-comment {
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: var(--White);
+    box-shadow: 5px 5px 6px #dadada, -5px -5px 6px #f6f6f6;
+}
+
+main.dark .container-comment {
+    background-color: var(--dark-color);
+    box-shadow: 5px 5px 8px #1b1b1b, -5px -5px 8px #272727;
+}
+
+.comments-wrp {
+    display: flex;
+    flex-direction: column;
+}
+
+.comments-wrp.base {
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.comment-section {
+    max-width: 75ch;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.comment {
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-areas:
+        "score user controls"
+        "score comment comment"
+        "score comment comment"
+    ;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    row-gap: 1rem;
+    color: var(--Grayish-Blue);
+}
+
+.c-score {
+    color: var(--Moderate-blue);
+    font-weight: 500;
+    grid-area: score;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: .75rem;
+    padding-top: .5rem;
+    width: 1rem;
+    box-sizing: content-box;
+    background-color: var(--Very-light-gray);
+    border-radius: 8px;
+    align-self: flex-start;
+}
+
+main.dark .c-score {
+    background-color: #232323;
+}
+
+.score-control {
+    width: 100%;
+    cursor: pointer;
+    object-fit: scale-down;
+}
+
+.c-text {
+    grid-area: comment;
+    width: 100%;
+}
+
+.c-user {
+    width: 100%;
+    grid-area: user;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.usr-name {
+    color: var(--Dark-blue);
+    font-weight: 700;
+}
+
+.usr-img {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    object-fit: fill;
+}
+
+.c-controls {
+    display: flex;
+    gap: 1rem;
+    color: var(--Moderate-blue);
+    grid-area: controls;
+    align-self: center;
+    justify-self: flex-end;
+}
+
+.c-controls a {
+    align-items: center;
+}
+
+.control-icon {
+    margin-right: .5rem;
+}
+
+.replies {
+    display: flex;
+    margin-right: 2.5rem;
+    padding-right: 2.4rem;
+    border-right: 1px solid var(--Light-grayish-blue);
+}
+
+main.en .replies {
+    margin-left: 2.5rem;
+    padding-left: 2.4rem;
+    border-left: 1px solid var(--Light-grayish-blue);
+}
+
+.reply-to {
+    color: var(--Moderate-blue);
+    font-weight: 500;
+}
+
+.reply-input {
+    display: grid;
+    margin-bottom: 1rem;
+    grid-template-areas: "avatar input button";
+    grid-template-columns: min-content auto min-content;
+    justify-items: center;
+    gap: 1rem;
+    min-height: 9rem;
+}
+
+.reply-input img {
+    grid-area: avatar;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.reply-input button {
+    grid-area: button;
+    align-self: flex-start;
+}
+
+.reply-input textarea {
+    grid-area: input;
+    padding: 1rem;
+    width: 100%;
+    border: 1px solid var(--Light-gray);
+    border-radius: 4px;
+    resize: none;
+    background-color: var(--Very-light-gray);
+}
+
+main.dark .reply-input textarea {
+    background-color: #232323;
+    border: 1px solid #323232;
+}
+
+.this-user .usr-name::after {
+    font-weight: 400;
+    content: "you";
+    color: var(--White);
+    background-color: var(--Moderate-blue);
+    padding: 0 .4rem;
+    padding-bottom: .2rem;
+    font-size: .8rem;
+    margin-left: .5rem;
+    border-radius: 2px;
+}
+
+.this-user .reply {
+    display: none;
+}
+
+
+@media screen and (max-width:640px) {
+    .container-comment {
+        padding: .75rem;
+    }
+
+    .replies {
+        padding-left: 1rem;
+        margin-left: .5rem;
+    }
+
+    .comment {
+        grid-template-areas:
+            "user user user"
+            "comment comment comment"
+            "score ... controls"
+        ;
+
+        gap: .5rem;
+    }
+
+    .c-score {
+        flex-direction: row;
+        width: auto;
+    }
+
+    .reply-input {
+        grid-template-areas:
+            "input input input"
+            "avatar ... button"
+        ;
+        grid-template-rows: auto min-content;
+        align-items: center;
+        gap: .5rem;
+    }
+
+    .reply-input img {
+        height: 2rem;
+        width: 2rem;
+    }
+
+    .reply-input textarea {
+        height: 6rem;
+        padding: .5rem;
+        align-self: stretch;
+    }
+}
+
+
+
+
+
+/* From Uiverse.io by roroland */
+#view-comment {
+    --fs: 1em;
+    --col1: honeydew;
+    --col2: rgba(240, 128, 128, 0.603);
+    --col3: var(--secondary-color);
+    --col4: var(--primary-color);
+    --pd: .5em .65em;
+    display: flex;
+    position: relative;
+    user-select: none;
+}
+
+.container-base.dark #view-comment {
+    --col3: var(--primary-color);
+    --col4: var(--secondary-color);
+}
+
+#view-comment.loading {
+    justify-content: center;
+}
+
+#view-comment::after,
+#view-comment::before {
+    content: '';
+    position: absolute;
+    align-self: center;
+    justify-self: center;
+    height: .5em;
+    margin: 0 .5em;
+    grid-column: 1;
+    grid-row: 1;
+    opacity: 1;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#view-comment::after {
+    border: 2px solid var(--col4);
+    border-radius: 50%;
+    transition: all .5s ease-out;
+    height: .1em;
+    width: .1em;
+    right: 5px;
+}
+
+.en #view-comment::after {
+    right: unset;
+    left: 5px;
+}
+
+#view-comment.loading::after {
+    left: unset;
+}
+
+#view-comment:hover::after,
+#view-comment.loading::after {
+    border: 2px solid var(--col4);
+    transform: rotate(-120deg) translate(10%, 140%);
+}
+#view-comment.loading::after {
+    right: unset;
+    left: unset;
+}
+
+#view-comment::before {
+    border-radius: 50% 0%;
+    border: 4px solid var(--col4);
+    box-shadow: inset 1px 1px var(--col2);
+    transition: all 1s ease-out;
+    transform: rotate(45deg);
+    height: .45em;
+    width: .45em;
+}
+
+#view-comment:hover::before,
+#view-comment.loading::before {
+    border-radius: 50%;
+    border: 4px solid var(--col1);
+    transform: scale(1.25) rotate(0deg);
+    animation: blink 1.5s ease-out 1s infinite alternate;
+}
+
+#view-comment:hover>span,
+#view-comment.loading>span {
+    filter: contrast(150%);
+    color: var(--col4) !important;
+}
+
+@keyframes blink {
+    0% {
+        transform: scale(1, 1) skewX(0deg);
+        opacity: 1;
+    }
+
+    5% {
+        transform: scale(1.5, .1) skewX(10deg);
+        opacity: .5;
+    }
+
+    10%,
+    35% {
+        transform: scale(1, 1) skewX(0deg);
+        opacity: 1;
+    }
+
+    40% {
+        transform: scale(1.5, .1) skewX(10deg);
+        opacity: .25;
+    }
+
+    45%,
+    100% {
+        transform: scale(1, 1) skewX(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes offset {
+    50% {
+        outline-offset: .15em;
+        outline-color: var(--col1);
+    }
+
+    55% {
+        outline-offset: .1em;
+        transform: translateY(1px);
+    }
+
+    80%,
+    100% {
+        outline-offset: 0;
+    }
+}
+
+
+/* From Uiverse.io by Tsiangana */
+.botao {
+    position: absolute;
+    appearance: none;
+    border: 0;
+    padding: var(--pd);
+    font-size: var(--fs);
+    background-color: var(--col3);
+    border-radius: 6px;
+    position: relative;
+    transform-origin: center;
+    padding-right: 30px;
+    width: 125px;
+    height: 45px;
+}
+
+.en .botao {
+    padding-left: 30px;
+    padding-right: unset;
+
+}
+
+.botao>span {
+    color: var(--primary-color) !important;
+}
+
+.container-base.dark .botao>span {
+    color: var(--secondary-color) !important;
+}
+
+.botao .mysvg {
+    display: none;
+}
+
+#view-comment.loading .botao {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding-top: 0;
+    transition: 0.5s linear;
+    -webkit-transition: 0.5s linear;
+    -moz-transition: 0.5s linear;
+    -ms-transition: 0.5s linear;
+    -o-transition: 0.5s linear;
+}
+
+#view-comment.loading .botao .texto {
+    display: none;
+}
+
+#view-comment.loading .botao .mysvg {
+    display: inline;
+}
+
+
+#view-comment.loading .botao::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 100%;
+    height: 100%;
+    border: 3.5px solid transparent;
+    border-top: 3.5px solid var(--col4);
+    border-right: 3.5px solid var(--col4);
+    border-radius: 50%;
+    animation: animateA 2s linear infinite;
+    -webkit-animation: animateA 2s linear infinite;
+}
+
+@keyframes animateA {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

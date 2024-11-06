@@ -1,0 +1,207 @@
+main section div,
+main section a,
+main section p,
+main section h1,
+main section h2,
+main section h3,
+main section h4,
+main section h5,
+main section strong,
+main section b,
+main section span,
+main section i,
+main .field input {
+  color: var(--secondary-color);
+}
+
+main.dark section div,
+main.dark section a,
+main.dark section p,
+main.dark section h1,
+main.dark section h2,
+main.dark section h3,
+main.dark section h4,
+main.dark section h5,
+main.dark section strong,
+main.dark section b,
+main.dark section span,
+main.dark section i,
+main.dark .field input {
+  color: var(--primary-color);
+}
+
+.container-form {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  column-gap: 30px;
+  margin-top: 20px;
+}
+
+.form {
+  position: absolute;
+  max-width: 430px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 6px;
+  background: #e8e8e8;
+  box-shadow: 5px 5px 6px #dadada, -5px -5px 6px #f6f6f6;
+}
+
+main.dark .form {
+  background: #212121 !important;
+  box-shadow: 5px 5px 8px #1b1b1b, -5px -5px 8px #272727 !important;
+}
+
+.form.signup {
+  opacity: 0;
+  pointer-events: none;
+}
+.forms.show-signup .form.signup {
+  opacity: 1;
+  pointer-events: auto;
+}
+.forms.show-signup .form.login {
+  opacity: 0;
+  pointer-events: none;
+}
+.form-content h1 {
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+}
+form {
+  margin-top: 30px;
+}
+.form .field {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 6px;
+}
+.field input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: inset -5px -1px 20px #b8b8b8, inset 5px 1px 20px #b8b8b8;
+}
+
+main.dark .field input {
+  background: #2d2d2d;
+  box-shadow: inset -5px -1px 20px #000000, inset 5px 1px 20px #000000;
+}
+
+.field input {
+  outline: none;
+  padding: 0 15px;
+  border: 1px solid#CACACA;
+}
+.field input:focus {
+  border-bottom-width: 2px;
+}
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+main.en .eye-icon {
+  left: unset;
+  right: 10px;
+}
+
+.form-link {
+  text-align: center;
+  margin-top: 10px;
+}
+.form-link span,
+.form-link a {
+  font-size: 14px;
+  font-weight: 400;
+}
+.form a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+main.dark .form a {
+  color: #3ca7ff !important;
+}
+.form-content a:hover {
+  text-decoration: underline;
+}
+.line {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  margin: 36px 0;
+  background-color: var(--primary-color);
+}
+
+main.dark .line {
+  background-color: var(--secondary-color);
+}
+.line::before {
+  content: "Or";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--primary-color);
+  padding: 0 15px;
+}
+main.dark .line::before {
+  background-color: var(--secondary-color);
+}
+
+.media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.media-options a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a.facebook {
+  width: 40px;
+  height: 40px;
+  border: 1px solid;
+  border-radius: 50%;
+}
+
+a.google {
+  border: 1px solid;
+  width: 40px !important;
+  border-radius: 50% !important;
+  height: 40px;
+}
+
+.remember{
+    position: relative;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 400px) {
+  .form {
+    padding: 20px 10px;
+  }
+}
