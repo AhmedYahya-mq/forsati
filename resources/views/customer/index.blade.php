@@ -248,7 +248,7 @@
                     <p>
                         {{ $blog->{"description_".$locale} }}
                     </p>
-                    <a href="#" class="readMore">
+                    <a href="{{route("blog.details",[$blog->{'slug_'.$locale}])}}" class="readMore">
                         <span class="text-center">{{ __('app.btn_read_more') }}</span>
                     </a>
                 </div>

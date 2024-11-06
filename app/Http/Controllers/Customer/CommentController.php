@@ -29,33 +29,38 @@ class CommentController extends Controller
         // التحقق من صحة البيانات وتحديد المدخلات المتوقعة فقط
         $validatedData = $request->validate([
             'content' => 'required|string|max:255',
-            'user_id' => 'required|exists:users,id',
+            'parent_id' => 'nullable|exists:comments,id', // تحقق من وجود تعليق الأب إذا كان موجودًا
             'blog_id' => 'nullable|exists:blogs,id', // تحقق من صحة blog_id إذا وُجد
             'scholarship_id' => 'nullable|exists:scholarships,id', // تحقق من صحة scholarship_id إذا وُجد
         ]);
 
+        // تحقق من المصادقة (في حال كنت تستخدم التوكن للمصادقة)
+        if (!$request->user()) {
+            return response()->json([
+                'error' => 'Unauthorized'
+            ], 401);
+        }
+
         try {
-            // إنشاء التعليق باستخدام الإنشاء السريع
+            // إضافة التعليق باستخدام الإنشاء السريع
             $comment = Comment::create([
                 'content' => $validatedData['content'],
-                'user_id' => $validatedData['user_id'],
+                'user_id' => $request->user()->id, // استخدام user المصادق عليه
+                'parent_id' => $validatedData['parent_id'],
                 'blog_id' => $validatedData['blog_id'] ?? null,
                 'scholarship_id' => $validatedData['scholarship_id'] ?? null,
             ]);
 
-            return response()->json([
-                'message' => 'Comment added successfully',
-                'comment' => $comment,
-            ], 201);
+            return response()->json(new CommentResource($comment)
+            , 201); // رمز الحالة 201 يعبر عن النجاح في الإنشاء
 
         } catch (\Exception $e) {
             // التعامل مع الأخطاء وإرجاع رسالة توضيحية
             return response()->json([
                 'error' => 'Failed to add comment',
                 'details' => $e->getMessage(),
-            ], 500);
+            ], 500); // رمز الحالة 500 يعني خطأ في الخادم
         }
     }
-
 
 }

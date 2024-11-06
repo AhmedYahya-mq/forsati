@@ -41,6 +41,7 @@ main.dark .container-comment {
 .comments-wrp {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .comments-wrp.base {

@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="token" content="{{ session("token") }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <link rel="stylesheet" href="{{ asset("customer/css/settings.css") }}">
     <link rel="stylesheet" href="{{ asset("customer/css/header.css") }}">
     <link rel="stylesheet" href="{{ asset("customer/css/main.css") }}">
@@ -96,9 +95,10 @@
 
                 <div class="left-nav">
                     @if(isset($user) && $user)
-                        <div class="user-info">
+                        <div class="user-info" data-id="{{ $user->id }}">
                             <div class="profile">
                                 <img src="{{ asset(path: 'storage/'."$user->image") }}"
+                                    title="{{ $user->name }}"
                                     alt="{{ $user->name }}" loading="lazy" srcset="">
                             </div>
                             <nav>

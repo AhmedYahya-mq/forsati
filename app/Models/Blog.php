@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Blog extends Model
 {
@@ -37,4 +37,23 @@ class Blog extends Model
     {
         return $this->hasMany(Comment::class); // علاقة مع التعليقات
     }
+
+    /**
+     * Get the time ago the blog was created.
+     */
+    /**
+     * Get the time ago the blog was created.
+     */
+    public function timeAgo()
+    {
+        // تأكد من أن `created_at` معرف
+        if ($this->created_at) {
+            $date = Carbon::parse($this->created_at);
+            return $date->diffForHumans();
+        }
+
+        // في حالة عدم وجود تاريخ، يمكن إرجاع رسالة بديلة
+        return "تاريخ غير معروف";
+    }
 }
+

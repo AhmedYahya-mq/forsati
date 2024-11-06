@@ -1,17 +1,16 @@
 class CommentManager {
-    constructor(apiUrl,apiAdd) {
+    constructor(type, apiUrl, apiAdd, currentUser) {
+        this.type = type;
         this.apiUrl = apiUrl;
-        this.apiAdd= apiAdd;
-        this.currentUser = {
-            id: 999, // ID مؤقت للمستخدم الحالي
-            name: "juliusomo",
-            image: "default.png" // رابط صورة المستخدم
-        };
+        this.apiAdd = apiAdd;
+        this.currentUser = currentUser;
         this.currentlyOpenedReplyForm = null;
+        this.currentCommentNode = null;
         this.commentsPage = 1; // الصفحة الحالية
         this.commentsPerPage = 10; // عدد التعليقات لكل صفحة
         this.fetchComments(); // تحميل التعليقات عند إنشاء الكائن
         this.initLoadMoreButton();
+        this.initReplayBaseForm();
     }
 
     // الدالة المسؤولة عن تحميل التعليقات من الـ API
@@ -37,21 +36,23 @@ class CommentManager {
     // دالة لإضافة تعليق جديد وحفظه في قاعدة البيانات
     async addComment(content, parentId = null, replyWrapper = null, replyNode = null) {
         try {
-            const newCommentData = this.buildCommentData(content, parentId);
+            const ref_id = $(`meta[name="${this.type}"]`).attr('content');
+            const newCommentData = this.buildCommentData(content, parentId, ref_id);
             const savedComment = await this.saveCommentToDatabase(newCommentData);
 
-            this.appendCommentToUI(savedComment, parentId, replyWrapper, replyNode);
+            this.appendCommentToUI(savedComment, parentId);
         } catch (error) {
             console.error("Error adding comment:", error);
         }
     }
 
     // إنشاء بيانات التعليق
-    buildCommentData(content, parentId) {
+    buildCommentData(content, parentId, ref_id) {
         return {
             content: content,
             parent_id: parentId,
-            user_id: this.currentUser.id // ID المستخدم الحالي
+            user_id: this.currentUser.id, // ID المستخدم الحالي
+            [this.type + "_id"]: ref_id || null // تعيين الرقم التسلسلي للتعليق عند نوع معين
         };
     }
 
@@ -71,16 +72,14 @@ class CommentManager {
     }
 
     // إضافة التعليق إلى الواجهة بعد حفظه بنجاح
-    appendCommentToUI(comment, parentId, replyWrapper, replyNode) {
-        const commentParent = parentId === null ? this.data : this.findCommentById(parentId).replies;
-        commentParent.push(comment);
-
+    appendCommentToUI(comment, parentId = null) {
+        $(".no-comments").remove();
         const commentNode = this.createCommentNode(comment);
 
-        if (replyWrapper) {
-            replyWrapper.prepend(commentNode);
-        } else if (replyNode) {
-            $(replyNode).after(commentNode);
+        if (this.currentlyOpenedReplyForm) {
+            $(this.currentlyOpenedReplyForm).after(commentNode);
+            this.currentlyOpenedReplyForm.remove();
+            this.currentlyOpenedReplyForm = null;
         } else {
             document.querySelector(".comments-wrp .comments-wrp").appendChild(commentNode);
         }
@@ -91,10 +90,11 @@ class CommentManager {
         const commentNode = document.createElement("div");
         commentNode.className = "comment-wrp";
         commentNode.innerHTML = this.getCommentTemplate(comment);
-
-        commentNode.querySelector(".reply-btn").addEventListener("click", () =>
-            this.handleReplyButtonClick(commentNode, comment)
-        );
+        if (this.currentUser.id) {
+            commentNode.querySelector(".reply-btn").addEventListener("click", () =>
+                this.handleReplyButtonClick(commentNode, comment)
+            );
+        }
 
         return commentNode;
     }
@@ -108,13 +108,13 @@ class CommentManager {
                 <div class="c-user">
                     <img src="${comment.user.image}" alt="" class="usr-img">
                     <p class="usr-name">${comment.user.name}</p>
-                    <p class="cmnt-at">${comment.created_at}</p>
+                    <p class="cmnt-at">${comment.date}</p>
                 </div>
                 <p class="c-text">
                     <span class="reply-to">${comment.parent_id ? '@' + comment.user.name : ''}</span>
                     ${comment.content}
                 </p>
-                <button class="reply-btn">${document.lang === "en" ? "Reply" : "رد"}</button>
+                ${this.currentUser.id?`<button class="reply-btn">${document.lang === "en" ? "Reply" : "رد"}</button>`:""}
             </div>
             <div class="replies comments-wrp"></div>
         `;
@@ -122,25 +122,33 @@ class CommentManager {
 
     // معالجة الضغط على زر الرد
     handleReplyButtonClick(commentNode, comment) {
+        console.log(commentNode.contains(this.currentlyOpenedReplyForm));
 
-        if (this.currentlyOpenedReplyForm && this.currentlyOpenedReplyForm !== commentNode) {
-            $(this.currentlyOpenedReplyForm).next(".reply-input.container-comment").remove();
-            this.currentlyOpenedReplyForm = null;
+        // إذا كان هناك نموذج مفتوح بالفعل وكان للـ commentNode نفسه، فقم بإزالته وأعد التهيئة
+        if (this.currentlyOpenedReplyForm) {
+            if (this.currentCommentNode === commentNode) {
+                this.currentlyOpenedReplyForm.remove();
+                this.currentlyOpenedReplyForm = null;
+                this.currentCommentNode = null;
+                return;
+            } else {
+                // إزالة النموذج السابق إذا كان يخص `commentNode` مختلف
+                this.currentlyOpenedReplyForm.remove();
+            }
         }
 
-        const existingReplyInput = $(commentNode).next(".reply-input.container-comment");
-        console.log(existingReplyInput);
+        // إنشاء نموذج الرد الجديد
+        const replyInputNode = this.createReplyInputNode(commentNode, comment);
 
-        if (existingReplyInput.length !== 0) {
-            existingReplyInput.remove();
-            this.currentlyOpenedReplyForm = null;
-        } else {
-            const replyInputNode = this.createReplyInputNode(commentNode, comment);
-            console.log(commentNode);
+        // تحديد موقع الإدراج: كابن ثانٍ أو كآخر عنصر
+        const insertPosition = commentNode.children.length > 1 ? commentNode.children[1] : null;
 
-            commentNode.after(replyInputNode);
-            this.currentlyOpenedReplyForm = commentNode;
-        }
+        // إدراج نموذج الرد الجديد في الموضع المحدد
+        commentNode.insertBefore(replyInputNode, insertPosition);
+
+        // تحديث المتغيرات لتتبع النموذج الحالي
+        this.currentlyOpenedReplyForm = replyInputNode;
+        this.currentCommentNode = commentNode;
     }
 
     // إنشاء نموذج إدخال للرد
@@ -163,7 +171,10 @@ class CommentManager {
             if (replyInput.value.trim() === "") return;
 
             const replyWrapper = $(commentNode).nextAll('.replies.comments-wrp').first();
-            this.addComment(replyInput.value, comment.id, replyWrapper, replyInputNode);
+            this.addComment(replyInput.value, comment.id);
+        });
+        replyInputNode.querySelector(".cancel-btn").addEventListener("click", () => {
+            replyInputNode.remove();
         });
 
         return replyInputNode;
@@ -222,11 +233,34 @@ class CommentManager {
             $("#view-comment")?.toggleClass("loading");
         });
     }
+
+    initReplayBaseForm() {
+        $(".reply-input.base-input-reply.container-comment .bu-primary").on("click", async (event) => {
+            try {
+                console.log($(".reply-input.base-input-reply.container-comment .cmnt-input").val());
+
+                // استخدام this داخل دالة السهم لضمان أنه يشير إلى الكائن الصحيح
+                const ref_id = $(`meta[name="${this.type}"]`).attr('content');
+                const newCommentData = this.buildCommentData($(".reply-input.base-input-reply.container-comment .cmnt-input").val(), null, ref_id);
+                const savedComment = await this.saveCommentToDatabase(newCommentData);
+
+                this.appendCommentToUI(savedComment);
+            } catch (error) {
+                console.error("Error adding comment:", error);
+            }
+        });
+    }
+
 }
 
 // Example usage
 const blogId = document.querySelector("meta[name='blog']").getAttribute("content");
-const token = document.querySelector("meta[name='token']").getAttribute("content");
+const token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+const currentUser = {
+    id: $("header .user-info").data("id") || null,
+    name: $("header .user-info img").attr("alt") || null,
+    image: $("header .user-info img").attr("src") || null,
+}
 const apiUrl = `http://127.0.0.1:8000/api/blogs/comments/blog/${blogId}`;
-const apiAdd = `api/blogs/comment/`;
-const commentManager = new CommentManager(apiUrl,apiAdd);
+const apiAdd = `http://127.0.0.1:8000/api/blogs/comment/`;
+const commentManager = new CommentManager("blog", apiUrl, apiAdd, currentUser);

@@ -28,8 +28,7 @@ class BlogResource extends JsonResource
             'content_en' => $this->content_en,
             'image' => asset(path: 'storage/'. $this->image),
             'author' => $this->user->name ?? $request->user('admin')->name ?? __("app.forsaty"),
-            'created_at' => $this->created_at->toDateTimeString(),
-            'updated_at' => $this->updated_at->toDateTimeString()
+            'created_at' => $this->created_at,
         ];
     }
 }

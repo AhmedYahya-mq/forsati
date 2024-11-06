@@ -21,8 +21,7 @@ class CommentResource extends JsonResource
             "parent_id"=> $this->parent_id ?? null,
             "blog_id" => $this->blog_id?? null,
             "content" => $this->content,
-            "created_at" => $this->created_at,
-            "updated_at" => $this->updated_at,
+            "date" => $this->timeAgo(),
             "user" => [
                 'id' => $this->user->id,
                 'name' => $this->user->name,

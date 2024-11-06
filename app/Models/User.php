@@ -82,21 +82,6 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class); // علاقة مع التعليقات
     }
 
-    /**
-     * Get the likes for the user.
-     */
-    public function likes()
-    {
-        return $this->hasMany(Like::class); // علاقة مع الإعجابات
-    }
-
-    /**
-     * Get the dislikes for the user.
-     */
-    public function dislikes()
-    {
-        return $this->hasMany(Dislike::class); // علاقة مع عدم الإعجابات
-    }
 
     /**
      * Get the scholarships published by the user.

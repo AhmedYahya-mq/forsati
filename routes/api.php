@@ -12,7 +12,9 @@ use App\Models\Advertisement;
 use App\Models\Blog;
 use App\Models\Scholarship;
 use App\Models\Specialization;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -82,10 +84,8 @@ Route::prefix("dashboard/admin/")->middleware([])->group(function (){
     Route::get( 'get-visited', [DashboardController::class, 'getVisitedCountry']);
 });
 
-
 Route::prefix("blogs")->group(function ()  {
     Route::get('', [BlogController::class, "getBlogs"]);
     Route::get('comments/{type}/{id}', CommentController::class)->name('blog.comments');
-    Route::post('comment', [CommentController::class, 'addComment'])->name('comments.store');
-
+    Route::post('comment', [CommentController::class, 'addComment'])->middleware("auth:web")->name('comments.store');
 });

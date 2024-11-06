@@ -5,8 +5,7 @@
 <link rel="stylesheet" href="{{ asset("customer/css/blogpost.css") }}">
 <link rel="stylesheet" href="{{ asset("customer/css/blog-details.css") }}">
 <link rel="stylesheet" href="{{ asset("customer/css/comments.css") }}">
-<meta name="blog" content="{{$blog->id}}">
-<meta name="blog" content="{{$blog->id}}">
+<meta name="blog" content="{{ $blog->id }}">
 @endsection
 
 @section("blog","activ")
@@ -21,7 +20,7 @@
     </strong>
 </div>
 <div class="box-search mobile-search">
-    <form action="#" class="search">
+    <form action="http://127.0.0.1:8000/blogs" method="get" class="search">
         <button class="search__button">
             <div class="search__icon">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -32,13 +31,13 @@
                 </svg>
             </div>
         </button>
-        <input type="text" class="search__input" placeholder="Search...">
+        <input type="text" class="search__input" name="search" placeholder="Search...">
     </form>
 </div>
 <div class="boxing">
     <div class="side-left-blog">
         <div class="box-search">
-            <form action="#" class="search">
+        <form action="http://127.0.0.1:8000/blogs" method="get" class="search">
                 <button class="search__button">
                     <div class="search__icon">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -50,7 +49,7 @@
                         </svg>
                     </div>
                 </button>
-                <input type="text" class="search__input" placeholder="Search...">
+                <input type="text" class="search__input" name="search" placeholder="Search...">
             </form>
         </div>
         <h1 class="top-title">{{ __("app.bestBlogs") }}</h1>
@@ -135,13 +134,14 @@
                 </button>
             </div>
         </div>
-        <div class="reply-input container-comment">
-            <img src="{{ asset('customer/assets/images/avatars/image-juliusomo.png') }}"
-                alt="" class="usr-img" />
-            <textarea class="cmnt-input"
-                placeholder="{{ __("app.write_your_comment") }}..."></textarea>
-            <button class="bu-primary">{{ __("app.comment") }}</button>
-        </div>
+        @if(isset($user) && $user->id!= null)
+            <div class="reply-input base-input-reply container-comment">
+                <img src="{{ asset("storage/".$user->image) }}" alt="" class="usr-img" />
+                <textarea class="cmnt-input"
+                    placeholder="{{ __("app.write_your_comment") }}..."></textarea>
+                <button class="bu-primary">{{ __("app.comment") }}</button>
+            </div>
+        @endif
     </div>
 </section>
 
@@ -151,4 +151,5 @@
 @section("script")
 <script src="{{ asset("customer/js/functions.js") }}"></script>
 <script src="{{ asset("customer/js/app.js") }}"></script>
+
 @endsection
