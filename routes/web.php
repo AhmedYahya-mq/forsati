@@ -20,8 +20,7 @@ use App\Http\Controllers\SpecializationController;
 use App\Http\Middleware\PoliciesDashboardMidleware;
 use App\Http\Controllers\Customer\CommentController;
 use App\Http\Controllers\Customer\BlogController as CustomerBlogController;
-
-
+use App\Http\Controllers\Customer\ScholarshipController as CustomerScholarshipController;
 
 Route::get('lang', function () {
     // تبديل اللغة بين العربية والإنجليزية
@@ -46,18 +45,10 @@ Route::get('lang', function () {
 
 Route::prefix('')->middleware(['log.visits'])->group(function () {
     Route::get('/', IndexController::class)->name('home');
-    Route::get('/awards', function () {
-        return view("customer.awards");
-    })->name('award');
-
-    Route::get('/awards/award-details', function () {
-        return view("customer.award-details");
-    })->name('award-details');
 
     Route::get('/login', function () {
         return view("customer.login");
     })->name('login');
-
     Route::get('/profile', function () {
         return view("customer.profile.index");
     })->name('profile');
@@ -92,4 +83,10 @@ Route::prefix("blogs")->group(function ()  {
     Route::get('', CustomerBlogController::class)->name('blog');
     Route::get('/{slug}', [CustomerBlogController::class,"show"])->name('blog.details');
     Route::get('comments/{type}/{id}', CommentController::class)->name('blog.comments');
+});
+
+Route::prefix("scholarship")->group(function ()  {
+    Route::get('', [CustomerScholarshipController::class,"index"])->name('scholarship.view');
+    // Route::get('/{slug}', [CustomerScholarshipController::class,"show"])->name('scholarship.details');
+    // Route::get('comments/{type}/{id}', CommentController::class)->name('scholarship.comments');
 });

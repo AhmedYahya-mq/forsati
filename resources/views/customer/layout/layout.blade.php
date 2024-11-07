@@ -26,6 +26,8 @@
     <script src="{{ asset("customer/js/jquery-3.7.1.min.js") }}"></script>
     <script src="{{ asset("customer/js/translation.js") }}"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
+    <link href="{{ asset('customer/css/load.css') }}" rel="stylesheet" media="all">
+    <link href="{{ asset('vendor/message-box.css') }}" rel="stylesheet" media="all">
     @yield("styles")
 
     <title data-lang="title">{{ __("app.forsaty") }}</title>
@@ -78,7 +80,7 @@
                                 href="{{ route('blog') }}">{{ __('app.blog') }}</a>
                         </li>
                         <li id="@yield("award")"><a data-lang="awards"
-                                href="{{ route('award') }}">{{ __('app.scholarships') }}</a>
+                                href="{{ route('scholarship.view') }}">{{ __('app.scholarships') }}</a>
                         </li>
                         {{-- <li><a data-lang="online_courses" href="#">{{ __('app.online_courses') }}</a>
                         </li> --}}
@@ -163,7 +165,7 @@
                                 href="{{ route('blog') }}">{{ __('app.blog') }}</a>
                         </li>
                         <li><a data-lang="awards"
-                                href="{{ route('award') }}">{{ __('app.scholarships') }}</a>
+                                href="{{ route('scholarship.view') }}">{{ __('app.scholarships') }}</a>
                         </li>
                         {{-- <li><a data-lang="online_courses" href="#">{{ __('app.online_courses') }}</a>
                         </li> --}}
@@ -193,7 +195,7 @@
 
     <script src="{{ asset("customer/js/script-floting-action-button-whatsapp.js") }}"></script>
     <script src="{{ asset("customer/js/script.js") }}"></script>
-
+    <script src="{{ asset('vendor/message-box.js') }}"></script>
     @yield('script')
 </body>
 

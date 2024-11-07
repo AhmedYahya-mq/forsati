@@ -20,16 +20,6 @@ initializeCKEditor('content_en', {
     }
 });
 
-// دالة لتنسيق الدول
-function formatCountry(country) {
-    var flagUrl = $(country.element).data('flag');
-    var $country = $(
-        (flagUrl == undefined) ? '<span style="display: flex;align-items: center;">' + country.text + '</span>' :
-        '<span style="display: flex;align-items: center;"><img src="' + flagUrl + '" class="flag-icon"/><spn>' + country.text + '</spn></span>'
-    );
-    return $country;
-}
-
 // دالة لتسجيل إضافات FilePond
 function registerFilePondPlugins() {
     FilePond.registerPlugin(
@@ -157,6 +147,17 @@ function renderData(scholarships) {
     const $scholarshipsContainer = $('#scholarships-container');
     $scholarshipsContainer.html(scholarshipsHtml);
 }
+
+// دالة لتنسيق الدول
+function formatCountry(country) {
+    var flagUrl = $(country.element).data('flag');
+    var $country = $(
+        (flagUrl == undefined) ? '<span style="display: flex;align-items: center;">' + country.text + '</span>' :
+        '<span style="display: flex;align-items: center;"><img src="' + flagUrl + '" class="flag-icon"/><spn>' + country.text + '</spn></span>'
+    );
+    return $country;
+}
+
 
 // دالة إعداد Select2 للدول
 function instanceCountries() {

@@ -55,12 +55,6 @@ class ScholarshipController extends Controller
         ]);
     }
 
-
-    public function edit($id){
-        $scholarship=Scholarship::findOrFail($id);
-        return new ScholarshipResource($scholarship);
-    }
-
     private function returnViewResponse($scholarships,$filters , $search)
     {
         // إرجاع العرض العادي مع البيانات والصلاحيات
@@ -94,6 +88,11 @@ class ScholarshipController extends Controller
             $request->input('page', 1)
         );
         return $paginatedScholarships;
+    }
+
+    public function edit($id){
+        $scholarship=Scholarship::findOrFail($id);
+        return new ScholarshipResource($scholarship);
     }
 
     private function validateData(Request $request, $required = "required")
@@ -245,7 +244,7 @@ class ScholarshipController extends Controller
             'Scholarship' => new ScholarshipResource($scholarship),
         ], 200);
     }
-    
+
     public function destroy(string $id)
     {
         $scholarship = Scholarship::findOrFail($id);

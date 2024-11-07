@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset("customer/css/blogpost.css") }}">
     <link rel="stylesheet" href="{{ asset("customer/css/loader-card.css") }}">
 
-    @endsection
+ @endsection
 
     @section("blog","activ")
 

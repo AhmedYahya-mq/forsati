@@ -41,9 +41,9 @@
     <!-- Main CSS-->
     <link href="{{ asset('admin/css/setting.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('admin/css/loader.css') }}" rel="stylesheet" media="all">
+    <link href="{{ asset('vendor/message-box.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('admin/css/sections.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('vendor/message-box.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('customer/css/loader.css') }}" rel="stylesheet" media="all">
     <style>
         a.relative.inline-flex.items-center

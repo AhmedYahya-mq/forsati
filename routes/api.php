@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdvertisementController;
+use App\Models\Blog;
+use App\Models\Admin;
+use App\Models\Scholarship;
+use App\Models\Advertisement;
+use App\Models\Specialization;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\Customer\CommentController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\SpecializationController;
-use App\Models\Admin;
-use App\Models\Advertisement;
-use App\Models\Blog;
-use App\Models\Scholarship;
-use App\Models\Specialization;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Customer\CommentController;
+use App\Http\Controllers\Customer\ScholarshipController as CustomerScholarshipController;
 
 
 
@@ -88,4 +88,11 @@ Route::prefix("blogs")->group(function ()  {
     Route::get('', [BlogController::class, "getBlogs"]);
     Route::get('comments/{type}/{id}', CommentController::class)->name('blog.comments');
     Route::post('comment', [CommentController::class, 'addComment'])->middleware("auth:web")->name('comments.store');
+});
+
+
+Route::prefix("scholarship")->group(function ()  {
+    Route::get('', [CustomerScholarshipController::class,"getScholarships"]);
+    // Route::get('/{slug}', [CustomerScholarshipController::class,"show"])->name('scholarship.details');
+    // Route::get('comments/{type}/{id}', CommentController::class)->name('scholarship.comments');
 });

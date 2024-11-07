@@ -103,16 +103,19 @@ body {
     scroll-behavior: smooth;
 }
 
-.container-base::-webkit-scrollbar {
+.container-base::-webkit-scrollbar,
+.select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar {
     width: 5px;
     background: var(--primary-color);
 }
 
-.container-base.dark::-webkit-scrollbar {
+.container-base.dark::-webkit-scrollbar,
+body.dark .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar  {
     background: var(--secondary-color);
 }
 
-.container-base::-webkit-scrollbar-thumb {
+.container-base::-webkit-scrollbar-thumb,
+.select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb  {
     background: var(--gradient-radial);
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -122,11 +125,13 @@ body {
     cursor: pointer;
 }
 
-.container-base.dark::-webkit-scrollbar-thumb {
+.container-base.dark::-webkit-scrollbar-thumb,
+body.dark .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb  {
     background: var(--gradient-linear);
 }
 
-.container-base.dark input {
+.container-base.dark input,
+body.dark .select2-container--default .select2-results>.select2-results__options {
     background-color: #26242e !important;
     border-color: #6b7280 !important;
 }

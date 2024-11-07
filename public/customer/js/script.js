@@ -166,7 +166,6 @@ function instanceMode() {
 // وظيفة للتبديل بين الوضعين عند النقر على زر التبديل
 function changeMode() {
     $("header .mode").click(function () {
-        console.log("aass");
 
         if ($(".bg-v-dark").hasClass("active")) {
             activateLightMode();
@@ -175,7 +174,6 @@ function changeMode() {
             activateDarkMode();
             localStorage.setItem("mode", "dark");
         }
-        console.log($("#js-pagition"));
     });
 }
 
@@ -185,7 +183,7 @@ function activateDarkMode() {
     $("html").removeClass("light");
     $("header .mode .fas").removeClass("fa-moon").addClass("fa-sun");
     $(".bg-v-dark").addClass("active");
-    $(".container-base,header,.box-loader,main").addClass("dark");
+    $(".container-base,header,.box-loader,main,body").addClass("dark");
     $("#js-pagition").find("a, span[aria-current='page'] span, span[aria-disabled='true'] span, span.relative.inline-flex.items-center.px-4.py-2.text-sm.font-medium.text-gray-500.bg-white.border.border-gray-300.cursor-default.leading-5.rounded-md").addClass("dark:bg-gray-800 dark:border-gray-600");
 }
 
@@ -195,7 +193,7 @@ function activateLightMode() {
     $("html").addClass("light");
     $("header .mode .fas").removeClass("fa-sun").addClass("fa-moon");
     $(".bg-v-dark").removeClass("active");
-    $(".container-base,header,.box-loader,main").removeClass("dark");
+    $(".container-base,header,.box-loader,main,body").removeClass("dark");
     $("#js-pagition").find("a, span[aria-current='page'] span, span[aria-disabled='true'] span, span.relative.inline-flex.items-center.px-4.py-2.text-sm.font-medium.text-gray-500.bg-white.border.border-gray-300.cursor-default.leading-5.rounded-md").removeClass("dark:bg-gray-800 dark:border-gray-600");
 }
 

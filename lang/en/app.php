@@ -70,5 +70,16 @@ return [
     "comments"=>"Comments",
     "comment"=>"Comment",
     "write_your_comment"=>"Write your comment",
-
+    "choose_country" => "Choose country",
+    "choose_major" => "Choose Major",
+    "full" => "Full Funding",
+    "partial" => "Partial Funding",
+    "private" => "Private Funding",
+    "tag"=>"Tags",
+    "country" => "Country",
+    "major" => "Major",
+    "funding_type" => "Funding type",
+    "educational_level"=>"Educational Level",
+    "read_also" => " Read Also",
+    "best_scholarships" => "Best Scholarships",
 ];

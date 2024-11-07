@@ -266,8 +266,8 @@ function listButtonPagetion(link) {
 }
 // دالة لإنشاء Loader بناءً على نوع الطلب
 function loader(text) {
-    let $element = $("body").prepend(`
-        <div class="container-loader" id="container-loader">
+    let $element = $("#scholarships-container").html(`
+        <div class="container-loader" id="container-loader" style="height: ${$("#scholarships-container").height()}px">
             <div id="wifi-loader">
                 <svg class="circle-outer" viewBox="0 0 86 86">
                     <circle class="back" cx="43" cy="43" r="40"></circle>
@@ -320,18 +320,8 @@ function handleError(jqXHR, textStatus, errorThrown) {
 
 // دالة للتعامل مع API
 function api(url, method = "GET", data = {}, handleResponse = (response) => {}, isChangeUrl = true, processData = true, contentType = "application/json") {
-    let $loader = null;
-    if (typeof renderLoading === "function" && method === "GET" && isChangeUrl) {
-        renderLoading();
-    }
-    if (method === "GET" && !isChangeUrl) {
-        $loader = loader(getLoaderMessage(method));
-        console.log($loader);
-    }
-
-    if (["POST", "PUT", "PATCH", "DELETE"].includes(method.toUpperCase())) {
-        $loader = loader(getLoaderMessage(method));
-    }
+    let $loader = loader(getLoaderMessage(method));
+    // console.log();
 
     return new Promise((resolve, reject) => {
         $.ajax({
