@@ -8,8 +8,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use App\Events\AdminLoggedIn;
-use App\Events\AdminLoggedOut;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,9 +26,7 @@ class AuthenticatedSessionController extends Controller
     {
 
         $request->authenticate();
-
-        // سجل الحدث عند تسجيل الدخول
-        event(new AdminLoggedIn(Auth::user())); // Dispatch الحدث
+        // Dispatch الحدث
         $request->session()->regenerate();
         return redirect()->intended(route('home', absolute: false));
     }
@@ -43,8 +39,6 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
 
         Auth::logout();
-
-        event(new AdminLoggedOut($user));
 
         $request->session()->invalidate();
 

@@ -114,7 +114,7 @@ class CommentManager {
                     <span class="reply-to">${comment.parent_id ? '@' + comment.user.name : ''}</span>
                     ${comment.content}
                 </p>
-                ${this.currentUser.id?`<button class="reply-btn">${document.documentElement.lang === "en" ? "Reply" : "رد"}</button>`:""}
+                ${this.currentUser.id?`<button class="reply-btn">${document.lang === "en" ? "Reply" : "رد"}</button>`:""}
             </div>
             <div class="replies comments-wrp"></div>
         `;
@@ -157,13 +157,13 @@ class CommentManager {
         replyInputNode.className = "reply-input container-comment";
         replyInputNode.innerHTML = `
             <img src="${this.currentUser.image}" alt="" class="usr-img">
-            <textarea class="cmnt-input" placeholder="${document.documentElement.lang === "en" ? "Add a reply" : "أكتب ردك"}..."></textarea>
-            <button class="bu-primary btn-reply">${document.documentElement.lang === "en" ? "Reply" : "رد"}</button>
+            <textarea class="cmnt-input" placeholder="${document.lang === "en" ? "Add a reply" : "أكتب ردك"}..."></textarea>
+            <button class="bu-primary btn-reply">${document.lang === "en" ? "Reply" : "رد"}</button>
             <button class="bu-primary cancel-btn"
                     style="
                         align-self: end;
                         background: red;"
-            >${document.documentElement.lang === "en" ? "Cancel" : "الغاء"}</button>
+            >${document.lang === "en" ? "Cancel" : "الغاء"}</button>
         `;
 
         replyInputNode.querySelector(".btn-reply").addEventListener("click", () => {

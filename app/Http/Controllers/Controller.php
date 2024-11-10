@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 abstract class Controller
 {
-    protected const perPage=1;
+    protected const perPage=10;
     protected $dirImage = "";
     protected $fileKeys = [
         "image",

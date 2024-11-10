@@ -9,11 +9,13 @@ section#awards {
 }
 
 div.awards-box {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
+    min-height: 514.25px;
 }
 
 .award-link {

@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="{{ asset("customer/css/widegt-floting-button-whatsapp.css") }}">
     <script src="{{ asset("customer/js/jquery-3.7.1.min.js") }}"></script>
     <script src="{{ asset("customer/js/translation.js") }}"></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
     <link href="{{ asset('customer/css/load.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('vendor/message-box.css') }}" rel="stylesheet" media="all">
     @yield("styles")

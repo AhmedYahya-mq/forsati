@@ -15,10 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
         //
         $middleware->alias([
             "admin"=>\App\Http\Middleware\AdminMiddleware::class,
+            'auth.user' => \App\Http\Middleware\AuthUserMiddleware::class,
             "sanitizeInput"=>\App\Http\Middleware\SanitizeInput::class,
             'log.visits' => \App\Http\Middleware\LogVisits::class,
-        ]);
 
+        ]);
         $middleware->group('api', [
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',

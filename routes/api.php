@@ -16,7 +16,7 @@ use App\Http\Controllers\Customer\CommentController;
 use App\Http\Controllers\Customer\ScholarshipController as CustomerScholarshipController;
 
 
-
+// admin api routes -------------------------------------------------------------------//
 
 // api ادارة المستخدمين
 Route::prefix('dashboard/admin/user-manage')->middleware(["auth:sanctum","admin",'can:checkPolicy,'.Admin::class])->group(function () {
@@ -84,6 +84,10 @@ Route::prefix("dashboard/admin/")->middleware([])->group(function (){
     Route::get( 'get-visited', [DashboardController::class, 'getVisitedCountry']);
 });
 
+
+// users api routes -------------------------------------------------------------------//
+
+
 Route::prefix("blogs")->group(function ()  {
     Route::get('', [BlogController::class, "getBlogs"]);
     Route::get('comments/{type}/{id}', CommentController::class)->name('blog.comments');
@@ -91,8 +95,10 @@ Route::prefix("blogs")->group(function ()  {
 });
 
 
-Route::prefix("scholarship")->group(function ()  {
+Route::prefix("scholarships")->group(function ()  {
     Route::get('', [CustomerScholarshipController::class,"getScholarships"]);
-    // Route::get('/{slug}', [CustomerScholarshipController::class,"show"])->name('scholarship.details');
-    // Route::get('comments/{type}/{id}', CommentController::class)->name('scholarship.comments');
+    Route::get('/{slug}', [CustomerScholarshipController::class,"show"])->name('scholarship.details');
+    Route::get('comments/{type}/{id}', CommentController::class)->name('scholarship.comments');
+    Route::post('comment', [CommentController::class, 'addComment'])->middleware("auth:web")->name('comments.store');
+
 });

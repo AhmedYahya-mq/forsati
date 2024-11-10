@@ -20,7 +20,6 @@ class ScholarshipController extends Controller
 
         // جلب المستخدمين مع الصلاحيات والبحث بناءً على الفلترة والبحث
         $scholarships = $this->getFilteredScholarships($request, $searchQuery);
-
         // إذا كان الطلب من الواجهة العادية
         return $this->returnViewResponse($scholarships,
             [
@@ -49,14 +48,15 @@ class ScholarshipController extends Controller
                 'previous_page' => $scholarships->previousPageUrl(),
                 'next_page' => $scholarships->nextPageUrl(),
                 'total' => $scholarships->total(),
-
             ]
         ]);
     }
 
     private function returnViewResponse($scholarships,$filters , $search)
     {
+        $topFiveScholarships = Scholarship::orderBy('visit', 'desc')->take(5)->get();
         $locale=\Illuminate\Support\Facades\App::getLocale();
+        $topFiveBlogs = \App\Models\Blog::inRandomOrder()->take(5)->get();
         // إرجاع العرض العادي مع البيانات والصلاحيات
         return view('customer.awards', [
             'scholarships' => ScholarshipResource::collection($scholarships),
@@ -67,6 +67,8 @@ class ScholarshipController extends Controller
             "degree_levels" => DegreeLevel::all(),
             'filters'=>$filters,
             'locale'=> $locale,
+            "topFiveScholarships"=> $topFiveScholarships,
+            "topFiveBlogs"=> $topFiveBlogs,
         ]);
     }
     private function getFilteredScholarships(Request $request, $searchQuery = null)
@@ -89,4 +91,56 @@ class ScholarshipController extends Controller
         );
         return $paginatedScholarships;
     }
+
+    public function show($slug)
+    {
+        $scholarship = Scholarship::where("slug_en", $slug)->orWhere("slug_ar", $slug)->firstOrFail();
+
+        $relatedScholarships = $this->getRelatedScholarship($this->locale, $scholarship);
+        $topFiveScholarships = Scholarship::where('id', '!=', $scholarship->id)->orderBy('visit', 'desc')->take(5)->get();
+        $topFiveBlogs = \App\Models\Blog::inRandomOrder()->take(5)->get();
+        return view('customer.award-details', [
+            'user' => auth()->guard('web')->user() ?? null,
+            'scholarship' => $scholarship,
+            'relatedScholarships' => $relatedScholarships,
+            'locale' => $this->locale,
+            "topFiveBlogs"=> $topFiveBlogs,
+            "topFiveScholarships"=> $topFiveScholarships,
+        ]);
+    }
+
+    private function getRelatedScholarship($locale, $scholarship)
+{
+    $degreeLevels = $scholarship->degree_levels->pluck('name_en')->implode(',');
+    $countries = $scholarship->country->pluck('name_en')->implode(',');
+    $specializations = $scholarship->specializations->pluck('name_en')->implode(',');
+
+    // إعداد الفلاتر بناءً على الأسماء المسترجعة
+    $filters = [
+        'fundingTypes' => implode(',', [$scholarship->funding_type ]?? []),
+        'degree_levels' => $degreeLevels,  // تم استخدام الأسماء
+        'countryIds' => $countries,         // تم استخدام الأسماء
+        'specializationIds' => $specializations // تم استخدام الأسماء
+    ];
+
+    // محاولة جلب المنح الدراسية ذات الصلة بناءً على الفلاتر
+    $relatedScholarships = Scholarship::getFilteredScholarships(
+        '',
+        $filters['fundingTypes'],
+        $filters['countryIds'],
+        $filters['specializationIds'],
+        $filters['degree_levels'],
+        4,
+        1 ,
+        true
+    );
+
+    // إذا لم يوجد أي نتائج، يتم جلب 4 عناصر بشكل عشوائي
+    if ($relatedScholarships->isEmpty()) {
+        $relatedScholarships = Scholarship::inRandomOrder()->take(4)->get();
+    }
+
+    return $relatedScholarships;
+}
+
 }

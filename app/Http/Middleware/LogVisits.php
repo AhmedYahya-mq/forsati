@@ -49,6 +49,7 @@ class LogVisits
                 'region' =>  $loaction->regionName ?? 'Unknown',
                 'session_id' => $sessionId,
             ]);
+            session(['user_timezone' => $loaction->timezone ?? 'Asia/Aden']);
             $visit->country()->associate($visit->country_id);
         } catch (\Exception $e) {
             // يمكن إضافة تسجيل للأخطاء هنا

@@ -140,14 +140,13 @@ main.dark .c-score {
 
 .replies {
     display: flex;
-    margin-right: 2.5rem;
-    padding-right: 2.4rem;
+    margin:0 2.5rem;
+    padding:0 2.4rem;
     border-right: 1px solid var(--Light-grayish-blue);
 }
 
 main.en .replies {
-    margin-left: 2.5rem;
-    padding-left: 2.4rem;
+    border-right: unset;
     border-left: 1px solid var(--Light-grayish-blue);
 }
 
@@ -475,3 +474,9 @@ main.dark .reply-input textarea {
         transform: rotate(360deg);
     }
 }
+.no-comments {
+    font-size: x-large;
+    padding: 80px 0;
+    text-align: center;
+}
+

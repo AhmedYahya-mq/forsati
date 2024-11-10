@@ -10,8 +10,6 @@ class BlogController extends Controller
 {
     public function __invoke(Request $request)
     {
-        // $scholarships=\App\Models\Scholarship::with(['degree_levels', 'specializations'])->take(10)->get();
-        // $advertisements=\App\Models\Advertisement::take(10)->get();
         $searchQuery = $request->query('search');
 
         $blogs = $this->getFilteredBlogs($searchQuery);
@@ -19,9 +17,7 @@ class BlogController extends Controller
         return view('customer.blogs',
         [
             'user' => $request->user('web')?? null,
-            // 'scholarships' => $scholarships,
             'blogs' =>$blogs,
-            // "advertisements"=> $advertisements,
             "locale"=>$this->locale,
             "search"=> $request->input('search') ?? "",
             "topFiveBlogs"=> $topFiveBlogs,
@@ -51,10 +47,10 @@ class BlogController extends Controller
     public function show($slug)
     {
         $blog = Blog::where("slug_en", $slug)->orWhere("slug_ar", $slug)->firstOrFail();
-        
+
         $relatedBlogs = $this->getRelatedBlogs($this->locale, $blog);
         $topFiveBlogs = Blog::where('id', '!=', $blog->id)->orderBy('visit', 'desc')->take(5)->get();
-        
+
         return view('customer.blog-details', [
             'user' => auth()->guard('web')->user() ?? null,
             'blog' => $blog,
@@ -88,5 +84,5 @@ class BlogController extends Controller
         return $relatedBlogs;
     }
 
-    
+
 }

@@ -64,11 +64,12 @@
     <div class="side-src">
         <strong>
             <a href="{{ route('home') }}"><i class="fa-solid fa-house"></i> <span
-                    data-lang="home"></span></a>/ <span data-lang="awards">{{ __("app.scholarships") }}</span>
+                    data-lang="home"></span></a>&nbsp;>&nbsp; <span
+                data-lang="awards">{{ __("app.scholarships") }}</span>
         </strong>
     </div>
     <div class="box-search mobile-search">
-        <form action="#" class="search">
+        <div class="search">
             <div class="filter_button">
                 <div class="filter_icon">
                     <i class="fa-solid fa-sliders"></i>
@@ -87,13 +88,14 @@
                     </svg>
                 </div>
             </button>
-            <input type="text" title="{{ __("search") }}" id="search" value="{{ $search }}" class="search__input" placeholder="{{ __("search") }}...">
-        </form>
+            <input type="text" class="search__input" id="search" name="search" value="{{ $search }}"
+                placeholder="{{ __("app.search") }}...">
+        </div>
     </div>
     <div class="boxing">
         <div class="side-left-blog">
             <div class="box-search">
-                <form action="#" class="search">
+                <div class="search">
                     <button class="search__button">
                         <div class="search__icon">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -105,11 +107,11 @@
                             </svg>
                         </div>
                     </button>
-                    <input type="text" title="{{ __("search") }}" id="search" value="{{ $search }}" class="search__input"
-                        placeholder="{{ __("search") }}...">
-                </form>
+                    <input type="text" class="search__input" id="search" name="search" value="{{ $search }}"
+                        placeholder="{{ __("app.search") }}...">
+                </div>
             </div>
-            <h1 class="top-title filter-title" style="font-size: 1.5em;">Filters</h1>
+            <h1 class="top-title filter-title" style="font-size: 1.5em;">{{ __("app.filter") }}</h1>
             <div class="filtters-box">
                 <div class="container-filter" id="selected-filter">
                     <h4 style="padding: 20px 0;" id="get-selected-nav">{{ __("app.country") }}</h4>
@@ -126,8 +128,7 @@
                 <div class="container-filter" id="selected-filter">
                     <h4 style="padding: 20px 0;" id="get-selected-nav">{{ __("app.major") }}</h4>
                     <select id="specialization-select-filter"
-                        placeholder="{{ __("app.choose_major") }}" multiple=""
-                        style="width: 100%;">
+                        placeholder="{{ __("app.choose_major") }}" multiple="" style="width: 100%;">
                         @foreach($specializations as $specialization)
                             <option name="specialization"
                                 {{ in_array( $specialization->id, $filters['specializationIds'])?"selected":"" }}
@@ -155,7 +156,8 @@
                     </ul>
                 </div>
                 <div class="container-filter">
-                    <h4 style="padding: 20px 0 6px;" id="get-selected">{{ __("app.educational_level") }}</h4>
+                    <h4 style="padding: 20px 0 6px;" id="get-selected">
+                        {{ __("app.educational_level") }}</h4>
                     <ul class="list">
                         @foreach($degree_levels as $degree_level)
                             <li>
@@ -169,145 +171,46 @@
             </div>
             <h1 class="top-title" style="font-size: 1.5em;">{{ __("app.best_scholarships") }}</h1>
             <div class="box-top-blog">
-                <div class="card-top">
-                    <div class="card-img">
-                        <img src="{{ asset('customer/assets/card1.webp') }}" alt="">
-                        <span>
-                            1
-                        </span>
-                    </div>
-                    <div>
-                        <h3>منح حكومة الصين</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt
-                            repellat
-                            quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero
-                            ducimus
-                            aperiam non saepe ipsa vel placeat amet.</p>
-                    </div>
-                </div>
-                <div class="card-top">
-                    <div class="card-img">
-                        <img src="{{ asset('customer/assets/card2.webp') }}" alt="">
-                        <span>
-                            2
-                        </span>
-                    </div>
-                    <div>
-                        <h3>منح حكومة الصين</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt
-                            repellat
-                            quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero
-                            ducimus
-                            aperiam non saepe ipsa vel placeat amet.</p>
-                    </div>
-                </div>
-                <div class="card-top">
-                    <div class="card-img">
-                        <img src="{{ asset('customer/assets/card1.webp') }}" alt="">
-                        <span>
-                            3
-                        </span>
-                    </div>
-                    <div>
-                        <h3>منح حكومة الصين</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt
-                            repellat
-                            quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero
-                            ducimus
-                            aperiam non saepe ipsa vel placeat amet.</p>
-                    </div>
-                </div>
-                <div class="card-top">
-                    <div class="card-img">
-                        <img src="{{ asset('customer/assets/card1.webp') }}" alt="">
-                        <span>
-                            4
-                        </span>
-                    </div>
-                    <div>
-                        <h3>منح حكومة الصين</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt
-                            repellat
-                            quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero
-                            ducimus
-                            aperiam non saepe ipsa vel placeat amet.</p>
-                    </div>
-                </div>
-                <div class="card-top">
-                    <div class="card-img">
-                        <img src="{{ asset('customer/assets/card1.webp') }}" alt="">
-                        <span>
-                            5
-                        </span>
-                    </div>
-                    <div>
-                        <h3>منح حكومة الصين</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt
-                            repellat
-                            quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero
-                            ducimus
-                            aperiam non saepe ipsa vel placeat amet.</p>
-                    </div>
-                </div>
-
+                @forelse($topFiveScholarships as $topFiveScholarship)
+                    <a
+                        href="{{ route("scholarship.details",[$topFiveScholarship->{"slug_$locale"}]) }}">
+                        <div class="card-top">
+                            <div class="card-img">
+                                <img src="{{ asset("storage/$topFiveScholarship->image") }}"
+                                    alt="{{ $topFiveScholarship->{"title_$locale"} }}">
+                                <span>
+                                    {{ $loop->iteration }}
+                                </span>
+                            </div>
+                            <div>
+                                <h3>{{ $topFiveScholarship->{"title_$locale"} }}</h3>
+                                <p>{{ $topFiveScholarship->{"description_$locale"} }}</p>
+                            </div>
+                        </div>
+                    </a>
+                @empty
+                @endforelse
             </div>
             <h1 class="top-title">{{ __("app.read_also") }}</h1>
             <div class="box-top-blog">
-                <div class="card-top">
-                    <div class="card-img">
-                        <img src="{{ asset('customer/assets/blog/1.jpg') }}" alt="">
-                        <span>
-                            1
-                        </span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt repellat
-                        quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero ducimus
-                        aperiam non saepe ipsa vel placeat amet.</p>
-                </div>
-                <div class="card-top">
-                    <div class="card-img">
-                        <img src="{{ asset('customer/assets/blog/1.jpg') }}" alt="">
-                        <span>
-                            2
-                        </span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt repellat
-                        quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero ducimus
-                        aperiam non saepe ipsa vel placeat amet.</p>
-                </div>
-                <div class="card-top">
-                    <div class="card-img">
-                        <img src="{{ asset('customer/assets/blog/1.jpg') }}" alt="">
-                        <span>
-                            3
-                        </span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt repellat
-                        quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero ducimus
-                        aperiam non saepe ipsa vel placeat amet.</p>
-                </div>
-                <div class="card-top">
-                    <div class="card-img">
-                        <img src="{{ asset('customer/assets/blog/1.jpg') }}" alt="">
-                        <span>
-                            4
-                        </span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt repellat
-                        quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero ducimus
-                        aperiam non saepe ipsa vel placeat amet.</p>
-                </div>
-                <div class="card-top">
-                    <div class="card-img">
-                        <img src="{{ asset('customer/assets/blog/1.jpg') }}" alt="">
-                        <span>
-                            5
-                        </span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt repellat
-                        quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero ducimus
-                        aperiam non saepe ipsa vel placeat amet.</p>
-                </div>
+                @forelse($topFiveBlogs as $topBlog)
+                    <a href="{{ route("blog.details",$topBlog->{"slug_".$locale}) }}"
+                        title="{{ $topBlog->{"title_".$locale} }}">
+                        <div class="card-top">
+                            <div class="card-img">
+                                <img src="{{ asset(path: "storage/" . $topBlog->image) }}"
+                                    alt="{{ $topBlog->{"title_".$locale} }}">
+                                <span>
+                                    {{ $loop->iteration }}
+                                </span>
+                            </div>
+                            <p>
+                                {{ $topBlog->{"description_".$locale} }}
+                            </p>
+                        </div>
+                    </a>
+                @empty
+                @endforelse
             </div>
         </div>
         <div class="side-right-blog portfolio" id="portfolio">
@@ -343,7 +246,8 @@
                                 </div>
                             </div>
 
-                            <a href="#" class="award-link">
+                            <a href="{{ route("scholarship.details",[$scholarship->{"slug_".$locale}]) }}"
+                                class="award-link">
                                 <div class="head-info">
                                     <span class="fsz-10">{{ __('app.watch') }}
                                         {{ $scholarship->formatVisits() ?: "0" }}</span>
@@ -364,7 +268,7 @@
                     </div>
                 @empty
                     <div class="notfound">
-                        <h2 class="text-center">{{ __('app.notfound_scholarships') }}</h2>
+                        <h2 class="text-center">{{ __('app.notfound_scholarships') }}😢</h2>
                     </div>
                 @endforelse
             </div>

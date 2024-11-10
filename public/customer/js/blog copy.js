@@ -1,4 +1,3 @@
-
 // دالة عرض البيانات في الجدول
 function renderData(response, isAdd = false) {
     let blogs = Array.isArray(response) ? response : [response.blog];
@@ -28,9 +27,7 @@ function renderData(response, isAdd = false) {
             `;
         });
     } else {
-        tableBody = `<tr id='notfound'><td colspan="7">
-            <h2 class="text-center">${document.documentElement.lang !== "en"? "لا توجد مدونات" : "Not found Blogs"}😢</h2>
-        </td></tr>`;
+        tableBody = `<tr id='notfound'><td colspan="7"><h2 class="text-center">لا يوجد مدونات</h2></td></tr>`;
     }
 
     const $tableBody = $(".boxing .portfolio-gallery");
@@ -38,7 +35,7 @@ function renderData(response, isAdd = false) {
 }
 
 function renderLoading() {
-    const $tableBody = $("#blogs-container");
+    const $tableBody = $(".boxing .portfolio-gallery");
     $tableBody.html("");
     Array(10).fill().forEach(() => {
         $tableBody.append(`

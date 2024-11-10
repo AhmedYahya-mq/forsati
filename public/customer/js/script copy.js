@@ -27,8 +27,26 @@ let activeMenuItem = "";
 
 // تهيئة التطبيق
 function instnceApp() {
+    // instnceLang();
     instanceMode();
 }
+
+// تهيئة التطبيق للغة الافتراضيه من تخزين
+function instnceLang() {
+    lang = localStorage.getItem('lang') || getUserLanguage();
+    if (lang === 'en') {
+        $("header,main").each(function () {
+            $(this).toggleClass("en");
+        });
+    }
+    $('[data-lang]').each(function () {
+        const key = $(this).data('lang');
+        $(this).html(language[lang][key]);
+    });
+}
+
+
+
 
 // حدث تغيير حجم شاشه
 function resizeScreen() {
@@ -117,7 +135,6 @@ function showAndHideMenu() {
         $(".user-info nav").hide();
     });
 }
-
 // تهيئة وضع التطبيق (ليلي أو نهاري) بناءً على localStorage أو إعدادات النظام
 function instanceMode() {
     const savedMode = localStorage.getItem("mode");

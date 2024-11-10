@@ -68,7 +68,7 @@ class Admin extends Authenticatable
     }
 
      // أو إذا كانت صلاحية المشرف تحمل اسم مختلف مثل manage_admin
-    public function isAdmin(): bool
+    public function isSuperAdmin(): bool
     {
         return $this->permissions()->where('permission_id', 'manage_all')->exists();
     }
@@ -82,22 +82,6 @@ class Admin extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class); // علاقة مع التعليقات
-    }
-
-    /**
-     * Get the likes for the user.
-     */
-    public function likes()
-    {
-        return $this->hasMany(Like::class); // علاقة مع الإعجابات
-    }
-
-    /**
-     * Get the dislikes for the user.
-     */
-    public function dislikes()
-    {
-        return $this->hasMany(Dislike::class); // علاقة مع عدم الإعجابات
     }
 
     /**

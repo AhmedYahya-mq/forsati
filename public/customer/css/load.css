@@ -2,10 +2,11 @@
 
 /* From Uiverse.io by mobinkakei */
 .container-loader {
+    position: absolute;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding-top: 200px;
     background: transparent;
 }
 

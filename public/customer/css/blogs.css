@@ -8,7 +8,8 @@ span:not(:where(.side-src strong span, .whatsApp-poems span)),
 :where(h1, h2, h3, h4, h5, h6, p),
 .reply-input textarea,
 .list-item,
-button.reply-btn {
+button.reply-btn,
+li {
     color: var(--secondary-color) !important;
 }
 
@@ -23,7 +24,7 @@ button.reply-btn {
     i:not(:where(.row a i, i.fab.fa-whatsapp.click)),
     a,
     a i:not(.row a i),
-    p),
+    p, li),
 .reply-input textarea,
 button.reply-btn {
     color: var(--primary-color) !important;
@@ -37,6 +38,8 @@ button.reply-btn {
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
+    font-size: small;
+    padding: 0 15px;
 }
 
 main.dark .side-src {
@@ -72,6 +75,9 @@ main.dark .side-src * {
     width: 100%;
     padding: 0 20px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .boxing .sid-left-blog .box-search {
@@ -113,9 +119,11 @@ main .search__input {
     transition: all 0.2s;
     box-shadow: 5px 5px 6px #c5c5c5, -5px -5px 6px #f0f0f0;
 }
-.boxing .search__input{
+
+.boxing .search__input {
     width: 90%;
 }
+
 main.en .search__input {
     margin-right: -34px;
     margin-left: -66px;
@@ -134,7 +142,7 @@ main.dark .search__input {
     background-color: #f0eeee;
 }
 
-.boxing .search__input:focus{
+.boxing .search__input:focus {
     width: 100%;
 }
 
@@ -259,13 +267,12 @@ main.dark .card-top .card-img span {
     justify-content: center;
 }
 
-span.relative.inline-flex.items-center.px-4.py-2.ml-3.text-sm.font-medium.text-gray-500.bg-white.border.border-gray-300.cursor-default.leading-5.rounded-md.text-gray-600.bg-gray-800.border-gray-600{
+span.relative.inline-flex.items-center.px-4.py-2.ml-3.text-sm.font-medium.text-gray-500.bg-white.border.border-gray-300.cursor-default.leading-5.rounded-md.text-gray-600.bg-gray-800.border-gray-600 {
     margin: 0 !important;
 }
 
 
-span.relative.inline-flex.items-center
-{
+span.relative.inline-flex.items-center {
     --tw-text-opacity: 1;
     color: rgb(107 114 128 / var(--tw-text-opacity)) !important;
 }

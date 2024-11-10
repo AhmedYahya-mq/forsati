@@ -16,12 +16,12 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->is_admin && Auth::guard('admin')->user()->isActive()) {
+        if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->is_admin && Auth::guard('admin')->user()->status) {
             return $next($request);
         }
 
         if ($request->expectsJson()) {
-            if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->is_admin && Auth::guard('admin')->user()->isActive()) {
+            if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->is_admin && Auth::guard('admin')->user()->status) {
                 return response()->json(['error' => $request->user()], Response::HTTP_FORBIDDEN);
             }
         }

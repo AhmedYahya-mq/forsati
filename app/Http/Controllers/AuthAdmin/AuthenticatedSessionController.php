@@ -29,6 +29,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->authenticate("admin");
 
+        if(!Auth::guard('admin')->user()->is_admin || !Auth::guard('admin')->user()->status) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            $request->authenticate();
+            $request->session()->regenerate();
+            return redirect()->intended(route('home', absolute: false));
+        }
         // سجل الحدث عند تسجيل الدخول
         event(new AdminLoggedIn(Auth::guard('admin')->user())); // Dispatch الحدث
         $request->session()->regenerate();

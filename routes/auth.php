@@ -34,7 +34,7 @@ Route::middleware('guest')->group(function () {
         ->name('user.password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
     Route::get('verify-email', App\Http\Controllers\Auth\EmailVerificationPromptController::class)
         ->name('user.verification.notice');
 

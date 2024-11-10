@@ -6,8 +6,8 @@ function instansSearch() {
 }
 
 // حدث عند ضغط على كيبورد في مربع البحث
-function eventKeyprss() {
-    $(".search__input").on('keypress', async function (event) {
+function eventKeyprss(params) {
+    $("#search").on('keypress', async (event) => {
         if (event.key === 'Enter') {
             await search();
         }
@@ -16,7 +16,7 @@ function eventKeyprss() {
 
 // البحث
 async function search() {
-    const query = $(".search__input").val().trim();
+    const query = $("#search").val().trim();
     if (query) {
         let url = window.location.href;
         if (url.indexOf('/api/') === -1) {
@@ -31,9 +31,8 @@ async function search() {
 
 // حدث الادخال في مربع البحث
 function eventInputSearch() {
-    $(".search__input").on('input', async function()  {
-        const query = $(this).val().trim();
-        $(".search__input").val(query);
+    $("#search").on('input', async () => {
+        const query = $("#search").val().trim();
         if (!query) {
             let url = window.location.href;
             // Check if 'api' is not already in the URL
@@ -50,7 +49,7 @@ function eventInputSearch() {
 //  حدث عند صغط على زرار البحث
 function clickSearch() {
     // حدث البحث
-    $(".search__button").on('click', async function (e) {
+    $("#btn-search").on('click', async function (e) {
         e.preventDefault();
         await search();
     });
@@ -150,17 +149,15 @@ function renderPagetionButton(meta) {
 }
 
 function renderButtonNext(next_page) {
-    let classList1 = localStorage.getItem("mode") === "dark" ? "dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300" : "bg-gray-800 border-gray-600 text-gray-300 focus:border-blue-700 active:bg-gray-700 active:text-gray-300";
-    let classList2 = localStorage.getItem("mode") === "dark" ? "dark:text-gray-600 dark:bg-gray-800 dark:border-gray-600" : "text-gray-600 bg-gray-800 border-gray-600";
     if (next_page !== null) {
         $("div.flex.justify-between.flex-1").append(`
-            <a href="${next_page}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 ${classList1}">
+            <a href="${next_page}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
                 التالي »
             </a>
             `)
     } else {
         $("div.flex.justify-between.flex-1").append(`
-            <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md ${classList2}">
+            <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md dark:text-gray-600 dark:bg-gray-800 dark:border-gray-600">
                 التالي »
             </span>
             `);
@@ -169,17 +166,15 @@ function renderButtonNext(next_page) {
 }
 
 function renderButtonPervious(previous_page) {
-    let classList1 = localStorage.getItem("mode") === "dark" ? "dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300" : "bg-gray-800 border-gray-600 text-gray-300 focus:border-blue-700 active:bg-gray-700 active:text-gray-300";
-    let classList2 = localStorage.getItem("mode") === "dark" ? "dark:text-gray-600 dark:bg-gray-800 dark:border-gray-600" : "text-gray-600 bg-gray-800 border-gray-600";
     if (previous_page !== null) {
         $("div.flex.justify-between.flex-1").prepend(`
-            <a href="${previous_page}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 ${classList1}">
+            <a href="${previous_page}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
                 « السابق
             </a>
             `);
     } else {
         $("div.flex.justify-between.flex-1").prepend(`
-            <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md ${classList2}">
+            <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md dark:text-gray-600 dark:bg-gray-800 dark:border-gray-600">
                 « السابق
             </span>
             `);
@@ -194,14 +189,10 @@ function renderListPagetion(links) {
         if (itritor !== 0 && itritor !== links.length - 1 && itritor !== links.length - 2) {
             listButtonPagetion(link);
         }
-
-
-        let classList1 = localStorage.getItem("mode") === "dark" ? "dark:bg-gray-800 dark:border-gray-600 dark:active:bg-gray-700 dark:focus:border-blue-800" : "bg-gray-800 border-gray-600 active:bg-gray-700 focus:border-blue-800";
-        let classList2 = localStorage.getItem("mode") === "dark" ? "dark:bg-gray-800 dark:border-gray-600" : "bg-gray-800 border-gray-600";
         if (itritor === 0) {
             if (link.url) {
                 $('span.relative.z-0.inline-flex.shadow-sm.rounded-md').append(`
-                    <a href="${link.url}" rel="prev" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md leading-5 hover:text-gray-400 focus:z-10 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 ${classList1}" aria-label="${link.label}">
+                    <a href="${link.url}" rel="prev" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md leading-5 hover:text-gray-400 focus:z-10 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:active:bg-gray-700 dark:focus:border-blue-800" aria-label="${link.label}">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                         </svg>
@@ -210,7 +201,7 @@ function renderListPagetion(links) {
             } else {
                 $('span.relative.z-0.inline-flex.shadow-sm.rounded-md').append(`
                     <span aria-disabled="true" aria-label="${link.label}">
-                        <span class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default rounded-l-md leading-5 ${classList2}" aria-hidden="true">
+                        <span class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default rounded-l-md leading-5 dark:bg-gray-800 dark:border-gray-600" aria-hidden="true">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
@@ -222,7 +213,7 @@ function renderListPagetion(links) {
         if (itritor === links.length - 2) {
             if (link.url) {
                 $('span.relative.z-0.inline-flex.shadow-sm.rounded-md').append(`
-                    <a href="${link.url}" rel="prev" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md leading-5 hover:text-gray-400 focus:z-10 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 ${classList1}" aria-label="${link.label}">
+                    <a href="${link.url}" rel="prev" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md leading-5 hover:text-gray-400 focus:z-10 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:active:bg-gray-700 dark:focus:border-blue-800" aria-label="${link.label}">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                         </svg>
@@ -231,7 +222,7 @@ function renderListPagetion(links) {
             } else {
                 $('span.relative.z-0.inline-flex.shadow-sm.rounded-md').append(`
                     <span aria-disabled="true" aria-label="${link.label}">
-                        <span class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default rounded-r-md leading-5 ${classList2}" aria-hidden="true">
+                        <span class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default rounded-r-md leading-5 dark:bg-gray-800 dark:border-gray-600" aria-hidden="true">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
@@ -247,18 +238,16 @@ function renderListPagetion(links) {
 
 function listButtonPagetion(link) {
 
-    let classList1 = localStorage.getItem("mode") === "dark" ? "dark:bg-gray-800 dark:border-gray-600 dark:active:bg-gray-700 dark:focus:border-blue-800" : "bg-gray-800 border-gray-600 active:bg-gray-700 focus:border-blue-800";
-    let classList2 = localStorage.getItem("mode") === "dark" ? "dark:bg-gray-800 dark:border-gray-600" : "bg-gray-800 border-gray-600";
     if (!link.active) {
         $('span.relative.z-0.inline-flex.shadow-sm.rounded-md').append(`
-                <a href="${link.url}" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-500 focus:z-10 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 ${classList1}" aria-label="Go to page 2">
+                <a href="${link.url}" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-500 focus:z-10 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 dark:hover:text-gray-300 dark:active:bg-gray-700 dark:focus:border-blue-800" aria-label="Go to page 2">
                     ${link.label}
                 </a>
             `);
     } else {
         $('span.relative.z-0.inline-flex.shadow-sm.rounded-md').append(`
                 <span aria-current="page">
-                    <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 ${classList2}">
+                    <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 dark:bg-gray-800 dark:border-gray-600">
                         ${link.label}
                     </span>
                 </span>
@@ -267,10 +256,8 @@ function listButtonPagetion(link) {
 }
 // دالة لإنشاء Loader بناءً على نوع الطلب
 function loader(text) {
-    console.log(`height: ${$(parentLoader).height($(parentLoader).height())}px`);
-    var height = $(parentLoader).height();
-    let $element = $(parentLoader).html(`
-        <div class="container-loader" id="container-loader" style="height: ${height}px">
+    let $element = $("body").prepend(`
+        <div class="container-loader" id="container-loader">
             <div id="wifi-loader">
                 <svg class="circle-outer" viewBox="0 0 86 86">
                     <circle class="back" cx="43" cy="43" r="40"></circle>
@@ -323,8 +310,17 @@ function handleError(jqXHR, textStatus, errorThrown) {
 
 // دالة للتعامل مع API
 function api(url, method = "GET", data = {}, handleResponse = (response) => {}, isChangeUrl = true, processData = true, contentType = "application/json") {
-    let $loader = renderLoading();
-    // console.log();
+    let $loader = null;
+    if (typeof renderLoading === "function" && method === "GET" && isChangeUrl) {
+        renderLoading();
+    }
+    if (method === "GET" && !isChangeUrl) {
+        $loader = loader(getLoaderMessage(method));
+    }
+
+    if (["POST", "PUT", "PATCH", "DELETE"].includes(method.toUpperCase())) {
+        $loader = loader(getLoaderMessage(method));
+    }
 
     return new Promise((resolve, reject) => {
         $.ajax({

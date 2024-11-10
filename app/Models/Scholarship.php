@@ -39,7 +39,7 @@ class Scholarship extends Model
         return $text;
     }
 
-    public static function getFilteredScholarships($searchTerm, $fundingTypes, $countryIds, $specializationIds, $degreeLevelIds, $perPage = 10,$page=1)
+    public static function getFilteredScholarships($searchTerm, $fundingTypes, $countryIds, $specializationIds, $degreeLevelIds, $perPage = 10,$page=1,$isRandom=false)
     {
         // إنشاء مفتاح التخزين المؤقت بناءً على معلمات الإدخال
         $cacheKey = "{$perPage}{$page}{$searchTerm}{$fundingTypes}{$degreeLevelIds}{$specializationIds}{$countryIds}";
@@ -79,6 +79,9 @@ class Scholarship extends Model
 
             // ترتيب النتائج بناءً على عدد التطابقات
             $query->orderBy('match_count', 'DESC');
+            if($isRandom){
+                $query->inRandomOrder();
+            }
 
             // تطبيق Pagination
             return $query->paginate($perPage);

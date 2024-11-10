@@ -67,6 +67,7 @@ return [
     "web-description" => "Welcome to 'Forsati' – Your Ideal Destination for Scholarships and Professional Academic Support. We offer a comprehensive scholarship database, personalized consultations, and assistance with writing and reviewing applications. Discover global educational opportunities and enhance your chances of getting the perfect scholarship with 'Forsati'!",
     "write_message" => "Write Your Message...",
     "relatedBlog"=>"Similar blogs",
+    "relatedScholarship"=>"Similar Scholarship",
     "comments"=>"Comments",
     "comment"=>"Comment",
     "write_your_comment"=>"Write your comment",
@@ -82,4 +83,5 @@ return [
     "educational_level"=>"Educational Level",
     "read_also" => " Read Also",
     "best_scholarships" => "Best Scholarships",
+    "filter"=>"Filter",
 ];

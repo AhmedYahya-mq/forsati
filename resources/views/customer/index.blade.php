@@ -194,44 +194,47 @@
 
 <section id="awards">
     @forelse($scholarships as $scholarship)
-    <div class="card text-right" id="user-{{ $scholarship->id }}">
-    <div>
-        <div class="card-image row justify-content-center">
-            <img src="{{ asset('storage/'.$scholarship->image) }}"
-                alt="{{ $scholarship->{'title_'.$locale} }}" title="{{ $scholarship->{'title_'.$locale} }}" loading="lazy">
-            <div class="types">
-                @foreach($scholarship->specializations as $specialization)
-                    <span class="project-type">•
-                        {{ $specialization->{'name_'.$locale} }}</span>
-                @endforeach
-                @foreach($scholarship->degree_levels as $degree_level)
-                    <span class="project-type">•
-                        {{ $degree_level->{'name_'.$locale} }}</span>
-                @endforeach
-                <span class="project-type">•
-                    {{ $scholarship->country->{'name_'.$locale} }}</span>
-                <span class="project-type">•
-                    {{ $funding_types[$scholarship->funding_type] }}</span>
+        <div class="card text-right" id="user-{{ $scholarship->id }}">
+            <div>
+                <div class="card-image row justify-content-center">
+                    <img src="{{ asset('storage/'.$scholarship->image) }}"
+                        alt="{{ $scholarship->{'title_'.$locale} }}"
+                        title="{{ $scholarship->{'title_'.$locale} }}" loading="lazy">
+                    <div class="types">
+                        @foreach($scholarship->specializations as $specialization)
+                            <span class="project-type">•
+                                {{ $specialization->{'name_'.$locale} }}</span>
+                        @endforeach
+                        @foreach($scholarship->degree_levels as $degree_level)
+                            <span class="project-type">•
+                                {{ $degree_level->{'name_'.$locale} }}</span>
+                        @endforeach
+                        <span class="project-type">•
+                            {{ $scholarship->country->{'name_'.$locale} }}</span>
+                        <span class="project-type">•
+                            {{ $funding_types[$scholarship->funding_type] }}</span>
+                    </div>
+                </div>
+
+                <a href="{{ route("scholarship.details",[$scholarship->{"slug_".$locale}]) }}"
+                    class="award-link">
+                    <div class="head-info">
+                        <span class="fsz-10">{{ __('app.watch') }}
+                            {{ $scholarship->formatVisits() ?: "0" }}</span>
+                        <span class="fsz-10">{{ __('app.brief') }}
+                            {{ $scholarship->created_at->format('Y-d-M') }}</span>
+                    </div>
+                    <p class="card-title">{{ $scholarship->{'title_'.$locale} }}
+                    </p>
+                    <p class="card-body">
+                        {{ $scholarship->{'description_'.$locale} }}
+                    </p>
+                    <p class="footer"><span class="by-name">{{ __('app.deadline') }}</span> :
+                        <span class="date"> {{ $scholarship->deadline }}</span>
+                    </p>
+                </a>
             </div>
         </div>
-
-        <a href="#" class="award-link">
-            <div class="head-info">
-                <span class="fsz-10">{{ __('app.watch') }}
-                    {{ $scholarship->formatVisits() ?: "0" }}</span>
-                <span class="fsz-10">{{ __('app.brief') }}
-                    {{ $scholarship->created_at->format('Y-d-M') }}</span>
-            </div>
-            <p class="card-title">{{ $scholarship->{'title_'.$locale} }}</p>
-            <p class="card-body">
-                {{ $scholarship->{'description_'.$locale} }}
-            </p>
-            <p class="footer"><span class="by-name">{{ __('app.deadline') }}</span> :
-                <span class="date"> {{ $scholarship->deadline }}</span>
-            </p>
-        </a>
-    </div>
-</div>
     @empty
         <div class="notfound">
             <h2 class="text-center">{{ __('app.notfound_scholarships') }}</h2>
@@ -248,14 +251,16 @@
                     <p>
                         {{ $blog->{"description_".$locale} }}
                     </p>
-                    <a href="{{route("blog.details",[$blog->{'slug_'.$locale}])}}" class="readMore">
+                    <a href="{{ route("blog.details",[$blog->{'slug_'.$locale}]) }}"
+                        class="readMore">
                         <span class="text-center">{{ __('app.btn_read_more') }}</span>
                     </a>
                 </div>
                 <div class="portfolio-img row m-1 justify-content-center" style="position: relative;">
                     <img id="image-blog"
                         src="{{ asset(path: "storage/" . $blog->image) }}"
-                        title="{{ $blog->{"title_".$locale} }}" alt="{{ $blog->{"title_".$locale} }}" loading="lazy">
+                        title="{{ $blog->{"title_".$locale} }}"
+                        alt="{{ $blog->{"title_".$locale} }}" loading="lazy">
                 </div>
             </div>
         @empty

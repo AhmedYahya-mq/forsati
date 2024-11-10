@@ -1,4 +1,3 @@
-const parentLoader=$("#scholarships-container");
 // دالة تعبئة البيانات في الجدول باستخدام jQuery
 function renderData(scholarships) {
     let scholarshipsHtml = '';
@@ -53,7 +52,7 @@ function renderData(scholarships) {
         scholarshipsHtml = `
             <tr id='notfound'>
                 <td colspan="7">
-                    <h2 class="text-center">${document.documentElement.lang !== "en"? "لا توجد منح😢" : "Not found Scholarships😢"}</h2>
+                    <h2 class="text-center">${document.documentElement.lang !== "en"? "لا توجد منح" : "Not found Scholarships"}</h2>
                 </td>
             </tr>
         `;
@@ -123,37 +122,3 @@ $(document).ready(function () {
     instanceCountries();
     instanceSpecialization();
 });
-
-
-// دالة لعرض تحميل مؤقت
-function renderLoading() {
-    const $tableBody = $('#scholarships-container');
-    $tableBody.html("");
-    Array(10).fill().forEach(() => {
-        $tableBody.append(`
-        <div class="card">
-            <a href="#" class="award-link">
-                <div>
-                    <div class="card-image card__skeleton">
-                        <div class="types">
-                            <span class="wrapper-type card__skeleton"></span>
-                            <span class="wrapper-type card__skeleton"></span>
-                            <span class="wrapper-type card__skeleton"></span>
-                        </div>
-                    </div>
-                    <p></p>
-                    <div class="head-info">
-                        <span class="wrapper card__skeleton"></span>
-                        <span class="wrapper card__skeleton"></span>
-                    </div>
-                    <p class="card-title wrapper-title card__skeleton"></p>
-                    <p class="card-body wrapper-body card__skeleton"></p>
-                    <p class="card-body wrapper-body card__skeleton"></p>
-                    <p class="card-body wrapper-body card__skeleton"></p>
-                    <p class="footer wrapper-footer card__skeleton"></p>
-                </div>
-            </a>
-        </div>
-        `);
-    });
-}

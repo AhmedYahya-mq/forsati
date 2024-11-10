@@ -3,5 +3,4 @@
 return [
 
     'email'=>'البريد الكتروني',
-    'password'
 ];

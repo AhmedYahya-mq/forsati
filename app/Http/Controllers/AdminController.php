@@ -8,7 +8,6 @@ use App\Observers\AdminObserver;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {

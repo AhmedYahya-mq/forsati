@@ -6,8 +6,8 @@ function instansSearch() {
 }
 
 // حدث عند ضغط على كيبورد في مربع البحث
-function eventKeyprss() {
-    $(".search__input").on('keypress', async function (event) {
+function eventKeyprss(params) {
+    $("#search").on('keypress', async (event) => {
         if (event.key === 'Enter') {
             await search();
         }
@@ -16,7 +16,7 @@ function eventKeyprss() {
 
 // البحث
 async function search() {
-    const query = $(".search__input").val().trim();
+    const query = $("#search").val().trim();
     if (query) {
         let url = window.location.href;
         if (url.indexOf('/api/') === -1) {
@@ -31,9 +31,8 @@ async function search() {
 
 // حدث الادخال في مربع البحث
 function eventInputSearch() {
-    $(".search__input").on('input', async function()  {
-        const query = $(this).val().trim();
-        $(".search__input").val(query);
+    $("#search").on('input', async () => {
+        const query = $("#search").val().trim();
         if (!query) {
             let url = window.location.href;
             // Check if 'api' is not already in the URL
@@ -50,7 +49,7 @@ function eventInputSearch() {
 //  حدث عند صغط على زرار البحث
 function clickSearch() {
     // حدث البحث
-    $(".search__button").on('click', async function (e) {
+    $("#btn-search").on('click', async function (e) {
         e.preventDefault();
         await search();
     });
@@ -267,10 +266,8 @@ function listButtonPagetion(link) {
 }
 // دالة لإنشاء Loader بناءً على نوع الطلب
 function loader(text) {
-    console.log(`height: ${$(parentLoader).height($(parentLoader).height())}px`);
-    var height = $(parentLoader).height();
-    let $element = $(parentLoader).html(`
-        <div class="container-loader" id="container-loader" style="height: ${height}px">
+    let $element = $("#scholarships-container").html(`
+        <div class="container-loader" id="container-loader" style="height: ${$("#scholarships-container").height()}px">
             <div id="wifi-loader">
                 <svg class="circle-outer" viewBox="0 0 86 86">
                     <circle class="back" cx="43" cy="43" r="40"></circle>
@@ -323,7 +320,7 @@ function handleError(jqXHR, textStatus, errorThrown) {
 
 // دالة للتعامل مع API
 function api(url, method = "GET", data = {}, handleResponse = (response) => {}, isChangeUrl = true, processData = true, contentType = "application/json") {
-    let $loader = renderLoading();
+    let $loader = loader(getLoaderMessage(method));
     // console.log();
 
     return new Promise((resolve, reject) => {

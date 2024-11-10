@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset("customer/css/blogpost.css") }}">
     <link rel="stylesheet" href="{{ asset("customer/css/loader-card.css") }}">
 
- @endsection
+    @endsection
 
     @section("blog","activ")
 
@@ -15,11 +15,12 @@
     <div class="side-src">
         <strong>
             <a href="{{ route('home') }}"><i class="fa-solid fa-house"></i> <span
-                    data-lang="home"></span></a>&nbsp;>&nbsp; <span data-lang="blog">{{ __("app.blog") }}</span>
+                    data-lang="home"></span></a>&nbsp;>&nbsp; <span
+                data-lang="blog">{{ __("app.blog") }}</span>
         </strong>
     </div>
     <div class="box-search mobile-search">
-        <form action="#" class="search">
+        <div class="search">
             <button class="search__button">
                 <div class="search__icon">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -30,8 +31,9 @@
                     </svg>
                 </div>
             </button>
-            <input type="text" class="search__input" placeholder="{{ __("app.search") }}...">
-        </form>
+            <input type="text" class="search__input" id="search"  name="search" value="{{ $search }}"
+                placeholder="{{ __("app.search") }}...">
+        </div>
     </div>
     <div class="boxing">
         <div class="side-left-blog">
@@ -55,7 +57,8 @@
             <h1 class="top-title">{{ __("app.bestBlogs") }}</h1>
             <div class="box-top-blog">
                 @forelse($topFiveBlogs as $topBlog)
-                    <a href="{{ route("blog.details",$topBlog->{"slug_".$locale}) }}" title="{{ $topBlog->{"title_".$locale} }}">
+                    <a href="{{ route("blog.details",$topBlog->{"slug_".$locale}) }}"
+                        title="{{ $topBlog->{"title_".$locale} }}">
                         <div class="card-top">
                             <div class="card-img">
                                 <img src="{{ asset(path: "storage/" . $topBlog->image) }}"
@@ -75,7 +78,7 @@
         </div>
         <div class="side-right-blog portfolio" id="portfolio">
 
-            <div class="portfolio-gallery">
+            <div class="portfolio-gallery" id="blogs-container">
                 @forelse($blogs as $blog)
                     <div class="portfolio-box mix uiux text-right" id="user-{{ $blog->id }}">
                         <div class="portfolio-content">
@@ -83,7 +86,8 @@
                             <p>
                                 {{ $blog->{"description_".$locale} }}
                             </p>
-                            <a href="{{ route("blog.details",$blog->{"slug_".$locale}) }}" class="readMore">
+                            <a href="{{ route("blog.details",$blog->{"slug_".$locale}) }}"
+                                class="readMore">
                                 <span class="text-center">{{ __('app.btn_read_more') }}</span>
                             </a>
                         </div>
@@ -96,7 +100,7 @@
                     </div>
                 @empty
                     <div class="notfound">
-                        <h2 class="text-center">{{ __('app.notfound_blogs') }}</h2>
+                        <h2 class="text-center">{{ __('app.notfound_blogs') }}😢</h2>
                     </div>
                 @endforelse
             </div>

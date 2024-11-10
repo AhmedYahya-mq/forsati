@@ -20,40 +20,8 @@ use App\Http\Controllers\SpecializationController;
 use App\Http\Middleware\PoliciesDashboardMidleware;
 use App\Http\Controllers\Customer\CommentController;
 use App\Http\Controllers\Customer\BlogController as CustomerBlogController;
+use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\Customer\ScholarshipController as CustomerScholarshipController;
-
-Route::get('lang', function () {
-    // تبديل اللغة بين العربية والإنجليزية
-    $locale = Cookie::get("locale") !== "en" ? "en" : "ar";
-    // تعيين اللغة وتخزينها في الكوكيز
-    App::setLocale($locale);
-    $cookie = Cookie::make(name: 'locale', value: $locale, minutes: 525600,secure: false); // تخزين اللغة في الكوكيز لمده سنة بدون تشفير
-
-    // التحقق من الصفحة السابقة لتجنب التوجيه المتكرر
-    $previousUrl = url()->previous();
-    $currentUrl = url()->current();
-
-    if ($previousUrl === $currentUrl) {
-        return Redirect::to('/')->withCookie($cookie); // إعادة التوجيه إلى الصفحة الرئيسية مع تعيين الكوكي
-    }
-
-    return Redirect::back()->withCookie($cookie); // إعادة التوجيه إلى الصفحة السابقة مع تعيين الكوكي
-})->name('change_language');
-
-
-
-
-Route::prefix('')->middleware(['log.visits'])->group(function () {
-    Route::get('/', IndexController::class)->name('home');
-
-    Route::get('/login', function () {
-        return view("customer.login");
-    })->name('login');
-    Route::get('/profile', function () {
-        return view("customer.profile.index");
-    })->name('profile');
-});
-
 
 
 // admin routes ----------------------------------------------------------- //
@@ -79,14 +47,57 @@ Route::prefix('dashboard/admin')->middleware(['auth:admin','admin'])->group(func
     Route::get('/blog-manage',[BlogController::class, "index"])->name('admin.blogsManager')->middleware('can:checkPolicy,'.Blog::class);
 });
 
-Route::prefix("blogs")->group(function ()  {
+
+
+// user routes ---------------------------------------------------------------- //
+
+Route::get('lang/{lang?}', function ($lang=null) {
+
+    $locale="ar";
+    if($lang && in_array($lang, ['en', 'ar'])) {
+        $locale=$lang;
+    }else{
+        // تبديل اللغة بين العربية والإنجليزية
+        $locale = Cookie::get("locale") !== "en" ? "en" : $locale;
+    }
+
+    // تعيين اللغة وتخزينها في الكوكيز
+    App::setLocale($locale);
+    $cookie = Cookie::make(name: 'locale', value: $locale, minutes: 525600,secure: false); // تخزين اللغة في الكوكيز لمده سنة بدون تشفير
+
+    // التحقق من الصفحة السابقة لتجنب التوجيه المتكرر
+    $previousUrl = url()->previous();
+    $currentUrl = url()->current();
+
+    if ($previousUrl === $currentUrl) {
+        return Redirect::to('/')->withCookie($cookie); // إعادة التوجيه إلى الصفحة الرئيسية مع تعيين الكوكي
+    }
+
+    return Redirect::back()->withCookie($cookie); // إعادة التوجيه إلى الصفحة السابقة مع تعيين الكوكي
+})->name('change_language');
+
+Route::prefix('')->middleware(['log.visits'])->group(function () {
+    Route::get('/', IndexController::class)->name('home');
+});
+
+Route::prefix("blogs")->middleware(['log.visits'])->group(function ()  {
     Route::get('', CustomerBlogController::class)->name('blog');
     Route::get('/{slug}', [CustomerBlogController::class,"show"])->name('blog.details');
     Route::get('comments/{type}/{id}', CommentController::class)->name('blog.comments');
 });
 
-Route::prefix("scholarship")->group(function ()  {
+Route::prefix("scholarships")->middleware(['log.visits'])->group(function ()  {
     Route::get('', [CustomerScholarshipController::class,"index"])->name('scholarship.view');
-    // Route::get('/{slug}', [CustomerScholarshipController::class,"show"])->name('scholarship.details');
-    // Route::get('comments/{type}/{id}', CommentController::class)->name('scholarship.comments');
+    Route::get('/{slug}', [CustomerScholarshipController::class,"show"])->name('scholarship.details');
+    Route::get('comments/{type}/{id}', CommentController::class)->name('scholarship.comments');
+});
+
+
+Route::prefix('profile')->middleware(['auth.user'])->group(function () {
+    Route::get('', [CustomerProfileController::class,"index"])->name('profile');
+    // Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::post('/upload-image-temp', [ProfileController::class, 'uploadImageTemp'])->name('profile.upload-image-temp');
+    // Route::delete('/delete-temp-image', [ProfileController::class, 'deleteTempImage'])->name('profile.delete-temp-image');
 });
