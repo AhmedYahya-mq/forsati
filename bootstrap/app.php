@@ -15,9 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
         //
         $middleware->alias([
             "admin"=>\App\Http\Middleware\AdminMiddleware::class,
-            'auth.user' => \App\Http\Middleware\AuthUserMiddleware::class,
+            'authuser' => \App\Http\Middleware\AuthMiddleware::class,
+            'guestuser' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             "sanitizeInput"=>\App\Http\Middleware\SanitizeInput::class,
             'log.visits' => \App\Http\Middleware\LogVisits::class,
+            'checkPolicy' => \App\Http\Middleware\CheckPolicy::class,
 
         ]);
         $middleware->group('api', [

@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthUserMiddleware
+class AuthMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $guard = "web"): Response
     {
         // التحقق إذا كان المستخدم مسجلاً الدخول باستخدام الحارس 'web'
-        if (!Auth::guard('web')->check()) {
+        if (!Auth::guard($guard)->check()) {
             // إذا كان الطلب API، أعد استجابة JSON بدلاً من إعادة التوجيه
             if ($request->expectsJson()) {
                 return response()->json([
@@ -25,8 +25,10 @@ class AuthUserMiddleware
                 ], 401); // 401 Unauthorized
             }
 
-            // إذا لم يكن الطلب API، قم بإعادة توجيهه إلى صفحة تسجيل الدخول الخاصة بالمستخدم
-            return redirect()->route('user.login');
+            if($guard==="admin")
+                return redirect()->route('admin.login');
+            else
+                return redirect()->route('login');
         }
 
         // إذا كان المستخدم مسجلاً الدخول، السماح له بمتابعة الطلب

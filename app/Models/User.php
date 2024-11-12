@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Permission;
+use App\Notifications\EmailVerificationNotification;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,6 +25,10 @@ class User extends Authenticatable
         'email',
         'password',
         'country_id',
+        'image',
+        'social_type',
+        'social_id',
+        'email_verified_at',
     ];
 
     /**
@@ -52,6 +57,11 @@ class User extends Authenticatable
     public function tokens()
     {
         return $this->hasMany(PersonalAccessToken::class, 'tokenable_id', 'id');
+    }
+
+    public function detailsUser()
+    {
+        return $this->hasOne(DetailsUser::class);
     }
 
     public function permissions()
@@ -105,7 +115,7 @@ class User extends Authenticatable
     }
 
 
-     /**
+    /**
      * Override the default password reset notification
      *
      * @param string $token
@@ -114,6 +124,16 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    /**
+     * Override the default password reset notification
+     *
+     * @param string $token
+     * @return void
+     */
+    public function sendEmailVerificationNotification(){
+        $this->notify(new EmailVerificationNotification());
     }
 
 }

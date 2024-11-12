@@ -201,6 +201,15 @@ class AdminController extends Controller
         // ربط الصلاحيات بالمستخدم
         $admin->permissions()->attach($request->permissions);
 
+         // Save user details
+         $admin->detailsUser()->create([
+            'notification' => [
+                "ad" => true,
+                "scholarship" => true,
+                "blog" => true,
+            ],
+        ]);
+
         // إرجاع المستخدم الجديد مع حالة 201
         return response()->json(['user'=>new UserResource($admin),"message"=>"تم نشاء مستخدم بنجاح"], 201);
     }

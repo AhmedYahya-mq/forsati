@@ -56,6 +56,12 @@ class Admin extends Authenticatable
         return $this->hasMany(PersonalAccessToken::class, 'tokenable_id', 'id');
     }
 
+    public function detailsUser()
+    {
+        return $this->hasOne(DetailsUser::class);
+    }
+
+
     public function permissions()
     {
         return $this->belongsToMany(related: Permission::class, table: 'admin_permissions'); // علاقة مع جدول الصلاحيات
@@ -103,6 +109,17 @@ class Admin extends Authenticatable
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id',"_id");
+    }
+
+     /**
+     * Override the default password reset notification
+     *
+     * @param string $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new \App\Notifications\ResetPasswordNotification($token));
     }
 
 }

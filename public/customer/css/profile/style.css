@@ -31,7 +31,7 @@ body.ar .form-group {
     text-align: right !important;
 }
 
-.card.overflow-hidden{
+.card.overflow-hidden {
     margin-bottom: 30px;
 }
 
@@ -256,7 +256,8 @@ body.dark .form-control:focus {
     .border-bottom-sm {
         border-bottom: 3px solid var(--secondary-color);
     }
-    .text-center-md{
+
+    .text-center-md {
         text-align: center !important;
     }
 }
@@ -273,22 +274,72 @@ body.dark .form-control:focus {
 
 }
 
-.mb-6.bg-white.rounded-lg.overflow-hidden.shadow-xl.transform.transition-all.sm\:w-full.sm\:max-w-2xl.sm\:mx-auto
-{
+.mb-6.bg-white.rounded-lg.overflow-hidden.shadow-xl.transform.transition-all.sm\:w-full.sm\:max-w-2xl.sm\:mx-auto {
     padding: 15px;
 }
-body.dark .mb-6.bg-white.rounded-lg.overflow-hidden.shadow-xl.transform.transition-all.sm\:w-full.sm\:max-w-2xl.sm\:mx-auto
-{
+
+body.dark .mb-6.bg-white.rounded-lg.overflow-hidden.shadow-xl.transform.transition-all.sm\:w-full.sm\:max-w-2xl.sm\:mx-auto {
     background-color: #000 !important;
 
 }
 
-header.dark{
+header.dark {
     background-color: transparent !important;
     box-shadow: unset !important;
 }
-.p-4.sm\:p-8.bg-white.shadow.sm\:rounded-lg
-{
+
+.p-4.sm\:p-8.bg-white.shadow.sm\:rounded-lg {
     background-color: transparent !important;
     box-shadow: unset !important;
+}
+
+
+
+/* COMMON STYLES*/
+.massege-pup{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.massege-pup .popup-p {
+    margin: 10px;
+    box-shadow: 4px 4px 10px -10px rgba(0, 0, 0, 1);
+    width: 300px;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    border-radius: 4px;
+    padding: 5px 0;
+    font-weight: 300;
+}
+
+
+/* SUCCESS */
+.massege-pup .success-popup-p {
+    background-color: #edfbd8 !important;
+    border: solid 1px #84d65a !important;
+}
+
+
+.success-icon-p i.fa-solid.fa-circle-check{
+    color: #2b641e !important;
+}
+
+
+.massege-pup .success-message-p {
+    color: #2b641e !important;
+}
+
+/* ALERT */
+.massege-pup .alert-popup-p {
+    background-color: #fefce8 !important;
+    border: solid 1px #facc15 !important;
+}
+
+
+.alert-icon-p i.fa-solid.fa-triangle-exclamation{
+    color: #ca8a04 !important;
+}
+.massege-pup .alert-message-p {
+    color: #ca8a04 !important;
 }

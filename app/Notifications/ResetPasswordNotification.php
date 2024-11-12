@@ -37,11 +37,9 @@ class ResetPasswordNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        // بناء رابط إعادة تعيين كلمة المرور باستخدام الرمز المميز
-        $url = route('user.password.reset', [
-            'token' => $this->token,
-            'email' => $notifiable->email
-        ]);
+        $url = $notifiable instanceof \App\Models\Admin
+        ? route('admin.password.reset', [  'token' => $this->token,'email' => $notifiable->email])
+        : route('password.reset', [  'token' => $this->token,'email' => $notifiable->email]);
         // استخدام قالب HTML مخصص للرسالة
         return (new MailMessage)
             ->subject('إعادة تعيين كلمة المرور')  // عنوان الرسالة

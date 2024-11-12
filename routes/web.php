@@ -25,7 +25,7 @@ use App\Http\Controllers\Customer\ScholarshipController as CustomerScholarshipCo
 
 
 // admin routes ----------------------------------------------------------- //
-Route::prefix('dashboard/admin/profile')->middleware('auth:admin')->group(function () {
+Route::prefix('dashboard/admin/profile')->middleware('authuser:admin')->group(function () {
     Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -36,21 +36,21 @@ Route::prefix('dashboard/admin/profile')->middleware('auth:admin')->group(functi
 Route::prefix('dashboard/admin/users')->group(function () {
     require __DIR__.'/auth_admin.php';
 });
-require __DIR__.'/auth.php';
 
-Route::prefix('dashboard/admin')->middleware(['auth:admin','admin'])->group(function () {
+Route::prefix('dashboard/admin')->middleware(['authuser:admin','admin'])->group(function () {
     Route::get('/', [DashboardController::class,"index"])->name('dashboard')->middleware([PoliciesDashboardMidleware::class]);
-    Route::get('/content-manage', [AdvertisementController::class, "index"])->name('admin.contentmanager')->middleware('can:checkPolicy,'.Advertisement::class);
-    Route::get('user-manage', [AdminController::class, "index"] )->name('admin.usersManager.index')->middleware(['can:checkPolicy,'.Admin::class]);
-    Route::get('/specialization-manage', [SpecializationController::class, "index"])->name('admin.specializationManager')->middleware('can:checkPolicy,'. Specialization::class);
-    Route::get('/award-manage',[ScholarshipController::class, "index"])->name('admin.awardsManager')->middleware('can:checkPolicy,'.Scholarship::class);;
-    Route::get('/blog-manage',[BlogController::class, "index"])->name('admin.blogsManager')->middleware('can:checkPolicy,'.Blog::class);
+    Route::get('/content-manage', [AdvertisementController::class, "index"])->name('admin.contentmanager')->middleware('checkPolicy:checkPolicy,'.Advertisement::class);
+    Route::get('user-manage', [AdminController::class, "index"] )->name('admin.usersManager.index')->middleware(['checkPolicy:checkPolicy,'.Admin::class]);
+    Route::get('/specialization-manage', [SpecializationController::class, "index"])->name('admin.specializationManager')->middleware('checkPolicy:checkPolicy,'. Specialization::class);
+    Route::get('/award-manage',[ScholarshipController::class, "index"])->name('admin.awardsManager')->middleware('checkPolicy:checkPolicy,'.Scholarship::class);;
+    Route::get('/blog-manage',[BlogController::class, "index"])->name('admin.blogsManager')->middleware('checkPolicy:checkPolicy,'.Blog::class);
 });
 
 
 
 // user routes ---------------------------------------------------------------- //
 
+require __DIR__.'/auth.php';
 Route::get('lang/{lang?}', function ($lang=null) {
 
     $locale="ar";
@@ -93,11 +93,11 @@ Route::prefix("scholarships")->middleware(['log.visits'])->group(function ()  {
 });
 
 
-Route::prefix('profile')->middleware(['auth.user'])->group(function () {
-    Route::get('', [CustomerProfileController::class,"index"])->name('profile');
-    // Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // Route::post('/upload-image-temp', [ProfileController::class, 'uploadImageTemp'])->name('profile.upload-image-temp');
-    // Route::delete('/delete-temp-image', [ProfileController::class, 'deleteTempImage'])->name('profile.delete-temp-image');
+Route::prefix('profile')->middleware(['authuser','log.visits'])->name('profile')->group(function () {
+    Route::get('', [CustomerProfileController::class,"index"])->name(name: '');
+    Route::put('general', [CustomerProfileController::class,"general"])->name(name: '.general');
+    Route::put('detail', [CustomerProfileController::class,"updateDetail"])->name(name: '.detail');
+    Route::put('link', [CustomerProfileController::class,"updateLink"])->name(name: '.link');
+    Route::put('notifications', [CustomerProfileController::class,"updateNotifications"])->name(name: '.notifications');
+    Route::delete('/', [CustomerProfileController::class, 'destroy'])->name('.profile.destroy');
 });

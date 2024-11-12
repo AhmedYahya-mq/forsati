@@ -13,13 +13,14 @@ use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\SpecializationController;
 use App\Http\Controllers\Customer\CommentController;
+use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\Customer\ScholarshipController as CustomerScholarshipController;
 
 
 // admin api routes -------------------------------------------------------------------//
 
 // api ادارة المستخدمين
-Route::prefix('dashboard/admin/user-manage')->middleware(["auth:sanctum","admin",'can:checkPolicy,'.Admin::class])->group(function () {
+Route::prefix('dashboard/admin/user-manage')->middleware(["auth:sanctum","authuser:admin","admin",'checkPolicy:checkPolicy,'.Admin::class])->group(function () {
     Route::put('state-users/{id}', [AdminController::class, 'updateAdminStatus'])->middleware("sanitizeInput");
     Route::put('email-verified-users/{id}', [AdminController::class, 'updateAdminEmailVerified'])->middleware("sanitizeInput");
     Route::get('', [AdminController::class, 'getAdmins']);
@@ -32,7 +33,7 @@ Route::prefix('dashboard/admin/user-manage')->middleware(["auth:sanctum","admin"
 
 
 //  api إدارة التخصصات
-Route::prefix("dashboard/admin/specialization-manage")->middleware(["auth:sanctum","admin",'can:checkPolicy,'.Specialization::class])->group(function (){
+Route::prefix("dashboard/admin/specialization-manage")->middleware(["auth:sanctum","authuser:admin","admin",'checkPolicy:checkPolicy,'.Specialization::class])->group(function (){
     Route::post("store",[SpecializationController::class, 'store'])->name('admin.specializationManager.store')->middleware("sanitizeInput");
     Route::get('', [SpecializationController::class, "getSpecializations"])->name('admin.specializationManager.index');
     Route::delete( 'destroy/{id}', [SpecializationController::class, 'destroy'])->name('admin.specializationManager.destroy');
@@ -43,7 +44,7 @@ Route::prefix("dashboard/admin/specialization-manage")->middleware(["auth:sanctu
 
 
 //  api إدارة التخصصات
-Route::prefix("dashboard/admin/content-manage")->middleware(["auth:sanctum","admin",'can:checkPolicy,'.Advertisement::class])->group(function (){
+Route::prefix("dashboard/admin/content-manage")->middleware(["auth:sanctum","authuser:admin","admin",'checkPolicy:checkPolicy,'.Advertisement::class])->group(function (){
     Route::post("store",[AdvertisementController::class, 'store'])->name('admin.advertisementManager.store')->middleware("sanitizeInput");
     Route::post('/upload-image-temp', [AdvertisementController::class, 'uploadImageTemp'])->name('advertisement.upload-image-temp');
     Route::delete('/delete-temp-image', [AdvertisementController::class, 'deleteTempImage'])->name('advertisement.delete-temp-image');
@@ -58,7 +59,7 @@ Route::prefix("dashboard/admin/content-manage")->middleware(["auth:sanctum","adm
 
 
 //إدارة المدونات Api
-Route::prefix("dashboard/admin/blog-manage")->middleware(["auth:sanctum","admin",'can:checkPolicy,'.Blog::class])->group(function (){
+Route::prefix("dashboard/admin/blog-manage")->middleware(["auth:sanctum","authuser:admin","admin",'checkPolicy:checkPolicy,'.Blog::class])->group(function (){
     Route::post("store",[BlogController::class, 'store'])->name('admin.blogManager.store')->middleware("sanitizeInput");
     Route::post('/upload-image-temp', [BlogController::class, 'uploadImageTemp']);
     Route::get('', [BlogController::class, "getBlogs"]);
@@ -69,7 +70,7 @@ Route::prefix("dashboard/admin/blog-manage")->middleware(["auth:sanctum","admin"
 
 
 //إدارة المنح Api
-Route::prefix("dashboard/admin/award-manage")->middleware(["auth:sanctum","admin",'can:checkPolicy,'.Scholarship::class])->group(function (){
+Route::prefix("dashboard/admin/award-manage")->middleware(["auth:sanctum","authuser:admin","admin",'checkPolicy:checkPolicy,'.Scholarship::class])->group(function (){
     Route::post("store",[ScholarshipController::class, 'store'])->middleware("sanitizeInput");
     Route::post('/upload-image-temp', [ScholarshipController::class, 'uploadImageTemp']);
     Route::delete('/delete-temp-image', [ScholarshipController::class, 'deleteTempImage'])->name('scholarship.delete-temp-image');
@@ -80,7 +81,7 @@ Route::prefix("dashboard/admin/award-manage")->middleware(["auth:sanctum","admin
 });
 
 
-Route::prefix("dashboard/admin/")->middleware([])->group(function (){
+Route::prefix("dashboard/admin/")->middleware(["authuser:admin"])->group(function (){
     Route::get( 'get-visited', [DashboardController::class, 'getVisitedCountry']);
 });
 
@@ -101,4 +102,11 @@ Route::prefix("scholarships")->group(function ()  {
     Route::get('comments/{type}/{id}', CommentController::class)->name('scholarship.comments');
     Route::post('comment', [CommentController::class, 'addComment'])->middleware("auth:web")->name('comments.store');
 
+});
+
+
+
+Route::prefix('profile')->middleware(["authuser"])->group(function () {
+    Route::post('/upload-image-temp', [CustomerProfileController::class, 'uploadImageTemp']);
+    Route::delete('/delete-temp-image', [CustomerProfileController::class, 'deleteTempImage']);
 });

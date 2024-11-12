@@ -57,10 +57,10 @@ class Popup {
     }
 
     // دالة لحذف الرسالة بعد 3 ثوانٍ مع حركة الاختفاء
-    static removePopupAfterDelay($popup) {
+    static removePopupAfterDelay($popup,style={top: "0px"}) {
         setTimeout(() => {
             $popup.animate({
-                top: "0px",
+                ...style,
                 opacity: 0 // تخفيف الرسالة تدريجياً
             }, 1000, function () {
                 $popup.remove();
@@ -79,11 +79,12 @@ class Popup {
 
         // عند الإظهار، تحريك الرسالة من top 0 إلى top 100
         $popup.css({
-            position: "fixed", // تثبيت الرسالة في أعلى الصفحة
-            top: "0px", // البداية من top 0
-            left: "50%", // توسيط الرسالة أفقياً
-            transform: "translateX(-50%)", // التأكد من أنها في وسط الشاشة
-            opacity: 0 // إخفاء الرسالة في البداية
+            position: "fixed",
+            top: "0px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            opacity: 0,
+            'z-index':'99999999999999999'
         }).animate({
             top: "50px", // التحرك إلى الأسفل بمقدار 100px
             opacity: 1 // إظهار الرسالة تدريجياً

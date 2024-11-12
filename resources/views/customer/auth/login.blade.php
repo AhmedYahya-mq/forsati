@@ -18,16 +18,17 @@
     <section class="container-form forms">
         <div class="form login">
             <div class="form-content">
+                <x-input-error :messages="$errors->get('socialError')" class="mt-2" />
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
-                <form method="POST" action="{{ route('user.login') }}">
+                <form method="POST" action="{{ route('login') }}">
                     @csrf
 
                     <!-- Email Address -->
                     <div>
                         <x-input-label for="email" :value="__('auth.login.email')" />
                         <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
-                            :value="old('email')" required autofocus autocomplete="username" />
+                            :value="old('email')" required autofocus autocomplete="ame" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
@@ -49,7 +50,7 @@
                                 class="ms-2 text-sm text-gray-600">{{ __('auth.login.remember_me') }}</span>
                         </label>
                         <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            href="{{ route('user.register') }}">
+                            href="{{ route('register') }}">
                             {{ __('auth.login.yes_account') }}
                         </a>
                     </div>
@@ -57,7 +58,7 @@
                     <div class="flex items-center justify-end mt-4">
                         @if(Route::has('password.request'))
                             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                href="{{ route('user.password.request') }}">
+                                href="{{ route('password.request') }}">
                                 {{ __('auth.login.forgot_password') }}
                             </a>
                         @endif
@@ -74,11 +75,11 @@
                     <div class="flex mt-4 items-center justify-center gap-6">
                         <a href="" title="{{ __('auth.login.facebook_login') }}"><i
                                 class="fa-brands fa-facebook" style="transform: scale(1.5);"></i></a>
-                        <a href="" title="{{ __('auth.login.google_login') }}"><i
-                                class="fa-brands fa-google" style="transform: scale(1.5);"></i></a>
+                        <a href="{{ route('google') }}"
+                            title="{{ __('auth.login.google_login') }}"><i class="fa-brands fa-google"
+                                style="transform: scale(1.5);"></i></a>
                     </div>
                 </form>
-
             </div>
         </div>
     </section>

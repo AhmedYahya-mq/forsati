@@ -30,7 +30,7 @@ abstract class Controller
     /**
      * دالة للتحقق مما إذا كان هناك ملف مرفوع وإرجاع المفتاح الخاص به.
      */
-    private function getUploadedFileKey(Request $request)
+    protected function getUploadedFileKey(Request $request)
     {
         foreach ($this->fileKeys as $key) {
             if ($request->hasFile($key)) {

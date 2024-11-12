@@ -25,7 +25,7 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
 
-        $request->authenticate();
+        $request->authenticate('web');
         // Dispatch الحدث
         $request->session()->regenerate();
         return redirect()->intended(route('home', absolute: false));
@@ -36,9 +36,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $user = Auth::user();
+        $user = Auth::guard('web')->user();
 
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 

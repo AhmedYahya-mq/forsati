@@ -96,20 +96,21 @@
 
                 <div class="left-nav">
                     @if(isset($user) && $user)
+                    <a data-lang="profile" href="{{ route('profile') }}">
                         <div class="user-info" data-id="{{ $user->id }}">
                             <div class="profile">
                                 <img src="{{ asset(path: 'storage/'."$user->image") }}"
                                     title="{{ $user->name }}"
                                     alt="{{ $user->name }}" loading="lazy" srcset="">
                             </div>
-                            <nav>
+                            <!-- <nav>
                                 <ul class="menu-user">
                                     <li><a data-lang="profile"
                                             href="{{ route('profile') }}">{{ __('app.profile') }}</a>
                                     </li>
                                     <li><a data-lang="favorite" href="#">{{ __('app.favorite') }}</a>
                                     </li>
-                                    <form method="POST" action="{{ route('user.logout') }}">
+                                    <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit"
                                             class="underline btn text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -117,10 +118,11 @@
                                         </button>
                                     </form>
                                 </ul>
-                            </nav>
+                            </nav> -->
                         </div>
+                    </a>
                     @else
-                        <a href="{{ route('user.login') }}" id="login"><b
+                        <a href="{{ route('login') }}" id="login"><b
                                 data-lang="login">{{ __('app.login') }}</b></a>
                     @endif
                     <div class="mode">

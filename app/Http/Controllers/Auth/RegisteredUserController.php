@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'country_id'=> $loaction->countryCode ?? "YE",
+            'country_id'=> $loaction->countryCode ?? null,
         ]);
         $user->createToken("auth_token")->tokenable_type = 'App\\Models\\User';
         $user->save();
@@ -51,10 +51,17 @@ class RegisteredUserController extends Controller
         // إضافة الصلاحية إلى المستخدم
         $user->permissions()->attach($normalUserPermissionId);
 
+        // Save user details
+        $user->detailsUser()->create([
+            'notification' => [
+                "ad" => true,
+                "scholarship" => true,
+                "blog" => true,
+            ],
+        ]);
         event(new Registered($user));
 
-        Auth::login($user);
 
-        return redirect(route('home', absolute: false));
+        return redirect(route('verification.notice', absolute: false));
     }
 }

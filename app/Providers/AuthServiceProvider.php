@@ -10,7 +10,7 @@ use App\Models\User; // استيراد نموذج User
 use App\Policies\AdminPolicy; // استيراد Policy لـ User
 use App\Policies\AdvertisementPolicy; // استيراد Policy لـ Advertisement
 use App\Policies\BlogPolicy; // استيراد Policy لـ Blog
-use App\Policies\ScholarshisPolicy; // استيراد Policy لـ Scholarship
+use App\Policies\ScholarshipPolicy; // استيراد Policy لـ Scholarship
 use App\Policies\SpecializationPolicy; // استيراد Policy لـ Specialization
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Specialization::class => SpecializationPolicy::class,
         Admin::class => AdminPolicy::class,
         User::class => UserPolicy::class,
-        Scholarship::class => ScholarshisPolicy::class,
+        Scholarship::class => ScholarshipPolicy::class,
 
     ];
 

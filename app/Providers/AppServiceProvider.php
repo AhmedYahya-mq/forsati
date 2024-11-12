@@ -25,7 +25,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class AppServiceProvider extends ServiceProvider
 {
-    public const HOME = '/dashboard'; // قم بتغيير الصفحة الافتراضية هنا
+    public const HOME = '/'; // قم بتغيير الصفحة الافتراضية هنا
 
     protected $listen = [
         AdminLoggedIn::class => [
